@@ -18,6 +18,7 @@ set message_cachedir=~/.mutt/cache/bodies
 set smtp_url="smtp://$smtp_username@smtp.gmail.com:587/"
 
 set move=no
+set markers=no
 ## set imap keepalive=900
 
 bind index N search-opposite
