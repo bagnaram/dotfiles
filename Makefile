@@ -9,5 +9,6 @@ xterm:
 vim:
 	ln -fs $(DOTFILES)/vimrc ${HOME}/.vimrc
 i3:
+	mkdir -p ${HOME}/.config/i3/
 	ln -fs $(DOTFILES)/i3_config  ${HOME}/.config/i3/config
 	ln -fs $(DOTFILES)/i3_status.conf  ${HOME}/.config/i3/status.conf
