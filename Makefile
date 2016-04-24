@@ -1,6 +1,6 @@
 DOTFILES := $(shell pwd)
 
-all: shell xterm vim i3
+all: mutt xterm vim i3
 mutt:
 	ln -fs $(DOTFILES)/muttrc ${HOME}/.muttrc
 	ln -fs $(DOTFILES)/mailcap ${HOME}/.mailcap
