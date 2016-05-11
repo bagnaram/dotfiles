@@ -229,9 +229,9 @@ exec redshift
 exec variety
 
 # run the merge for good colors
-exec xrdb -merge /home/mbagnara/.Xresources
-exec xrdb -merge /home/mbagnara/.Xdefaults
+exec xrdb -merge ~/.Xresources
+exec xrdb -merge ~/.Xdefaults
 
 # startup programs
-exec --no-starup-id i3-msg 'workspace "1: irssi"; exec rxvt-unicode;'
+exec --no-starup-id i3-msg 'workspace "1: shell"; exec rxvt-unicode;'
 #exec --no-startup-id i3msg 'workspace 3; exec rxvt-unicode;'
