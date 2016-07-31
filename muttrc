@@ -1,9 +1,10 @@
-
-set from=$my_email
-set realname=$my_name
+set from="bagnaramatt@gmail.com"
+set realname="Matt B"
 alternative_order text/plain text/html
 
-set imap_user=$my_email
+set imap_user=bagnaramatt@gmail.com
+set imap_pass="rkgpfasglqsjvxre"
+set smtp_pass="rkgpfasglqsjvxre"
 
 set folder="imaps://imap.gmail.com:993"
 set spoolfile="+INBOX"
@@ -15,7 +16,7 @@ set editor="vim -c 'set spell'"        # Spell checking in email compose
 set header_cache =~/.mutt/cache/headers
 set message_cachedir=~/.mutt/cache/bodies
 
-set smtp_url="smtp://$smtp_username@smtp.gmail.com:587/"
+set smtp_url="smtp://bagnaramatt@smtp.gmail.com:587/"
 
 set move=no
 set markers=no

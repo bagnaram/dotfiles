@@ -140,9 +140,9 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # audio controls
-bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+ unmute #increase sound volume
-bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%- unmute #decrease sound volume
-bindsym XF86AudioMute exec amixer set Master 1+ toggle # mute sound
+bindsym XF86AudioRaiseVolume exec ~/hotkey-ctl/volume.sh pony up #increase sound volume
+bindsym XF86AudioLowerVolume exec ~/hotkey-ctl/volume.sh pony down #decrease sound volume
+bindsym XF86AudioMute exec ponymix toggle # mute sound
 bindsym XF86AudioMicMute exec amixer set Capture toggle # mute mic
 
 # screen brightness controls
@@ -214,11 +214,6 @@ client.focused_inactive #002b36 #073642 #839496 #073642
 client.unfocused        #002b36 #073642 #839496 #073642
 client.urgent           #002b36 #dc322f #fdf6e3 #002b36
 
-# i3status bar config
-bar {
-	font pango:monospace 8
-	status_command i3status --config ~/.config/i3/status.conf
-}
 
 # auto run commands
 # set background
@@ -229,9 +224,9 @@ exec redshift
 exec variety
 
 # run the merge for good colors
-exec xrdb -merge /home/mbagnara/.Xresources
-exec xrdb -merge /home/mbagnara/.Xdefaults
+exec xrdb -merge ~/.Xresources
+exec xrdb -merge ~/.Xdefaults
 
 # startup programs
-exec --no-starup-id i3-msg 'workspace "1: irssi"; exec rxvt-unicode;'
+exec --no-starup-id i3-msg 'workspace "1: shell"; exec rxvt-unicode;'
 #exec --no-startup-id i3msg 'workspace 3; exec rxvt-unicode;'
