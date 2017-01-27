@@ -1,10 +1,10 @@
-set from="bagnaramatt@gmail.com"
-set realname="Matt B"
+set from=""
+set realname=""
 alternative_order text/plain text/html
 
-set imap_user=bagnaramatt@gmail.com
-set imap_pass="rkgpfasglqsjvxre"
-set smtp_pass="rkgpfasglqsjvxre"
+set imap_user=
+set imap_pass=""
+set smtp_pass=""
 
 set folder="imaps://imap.gmail.com:993"
 set spoolfile="+INBOX"
