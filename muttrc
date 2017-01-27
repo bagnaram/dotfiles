@@ -2,8 +2,8 @@ set from=""
 set realname=""
 alternative_order text/plain text/html
 
-#Use Application specific GMAIL password here, so nobody
-can hijack your account by looking at this file!
+## Use Application specific GMAIL password here, so nobody
+## can hijack your account by looking at this file!
 set imap_user=
 set imap_pass=""
 set smtp_pass=""
