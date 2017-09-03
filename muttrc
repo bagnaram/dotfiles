@@ -1,3 +1,7 @@
+## Aliases for email  groups
+alias roommates taconic86@gmail.com, drnewbrander@gmail.com
+
+
 set from="bagnaramatt@gmail.com"
 set realname="Matt B"
 alternative_order text/plain text/html

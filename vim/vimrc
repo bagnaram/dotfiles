@@ -5,6 +5,10 @@ set softtabstop=2       " unify
 set shiftround          " round to nearest tab
 set expandtab           " expand tabs to spaces
 
+" Draw settings
+set lazyredraw
+set showmatch
+
 set cindent		
 " smart indentation
 
@@ -18,4 +22,5 @@ set nu
 " Do Java autocomplete
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
-
+" VIM Pathogen plugin
+execute pathogen#infect()
