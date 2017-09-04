@@ -4,6 +4,7 @@ set realname="John Freeman"
 alternative_order text/plain text/html
 
 set imap_user=email@example.com
+
 set imap_pass=""
 set smtp_pass=""
 
