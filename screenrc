@@ -1,0 +1,26 @@
+startup_message off
+vbell on
+altscreen on
+hardstatus on
+hardstatus alwayslastline
+backtick 1 86400 86400 whoami
+backtick 2 86400 86400 uname -m
+
+# Allow bold colors - necessary for some reason
+attrcolor b ".I"
+# Tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# Enable 256 color term
+term xterm-256color
+
+#backtick 100 0 0 $HOME/.dotfiles/screenrc/screen-stats.awk
+
+#hardstatus string "%{= kY}%1`%{+b G}@%{+b Y}%H%{-b G} (%2`) %-=%{G}%100` %{w}|%{-} %{Y}%Y%{-}.%{Y}%m%{-}.%{Y}%d%{-} %D %{Y}%C%{-}:%{Y}%s%{-} %a"
+# Very nice tabbed colored hardstatus line
+hardstatus string '%{= Kd} %{= Kd}%-w%{= Kr}[%{= KW}%n %t%{= Kr}]%{= Kd}%+w %-= %{KG} %H%{KW}|%{KY}%101`%{KW}|%D %M %d %Y%{= Kc} %C%A%{-}'
+
+caption always
+caption string "%-Lw%{= bw}%50>%n %t%{-}%+Lw%<"
+
+shelltitle '$ |shell'
+

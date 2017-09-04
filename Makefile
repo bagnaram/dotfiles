@@ -1,7 +1,7 @@
 DOTFILES := $(shell pwd)
 
 .PHONY: all
-all: mutt xterm vim i3
+all: mutt xterm vim i3 screen
 .PHONY: mutt
 mutt:
 	ln -fs $(DOTFILES)/muttrc ${HOME}/.muttrc
@@ -9,6 +9,9 @@ mutt:
 .PHONY: xterm
 xterm:
 	ln -fs $(DOTFILES)/Xdefaults ${HOME}/.Xdefaults
+.PHONY: screen
+screen:
+	ln -fs $(DOTFILES)/screenrc ${HOME}/.screenrc
 .PHONY: vim
 vim:
 	if [ ! -d "${HOME}/.vim" ]; then ln -fs $(DOTFILES)/vim ${HOME}/.vim; fi
