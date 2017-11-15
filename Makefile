@@ -1,7 +1,7 @@
 DOTFILES := $(shell pwd)
 
 .PHONY: all
-all: mutt xterm vim i3 screen
+all: mutt xterm vim i3 screen redshift
 .PHONY: mutt
 mutt:
 	ln -fs $(DOTFILES)/muttrc ${HOME}/.muttrc
@@ -16,6 +16,9 @@ screen:
 vim:
 	if [ ! -d "${HOME}/.vim" ]; then ln -fs $(DOTFILES)/vim ${HOME}/.vim; fi
 	if [ ! -d "${HOME}/.vim/autoload" ]; then ln -fs $(DOTFILES)/vim/pathogen/autoload ${HOME}/.vim/autoload; fi
+.PHONY: redshift
+redshift:
+	if [ ! -d "${HOME}/.config/redshift.conf" ]; then ln -fs $(DOTFILES)/redshift.conf ${HOME}/.config/redshift.conf; fi
 .PHONY: i3
 i3:
 	mkdir -p ${HOME}/.config/i3/

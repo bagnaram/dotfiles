@@ -13,7 +13,7 @@ set spoolfile=""
 set postponed =""
 ## set trash="+[Google Mail]/Trash"
 #set social="+[Google Mail]/Social"
-set editor="vim -c 'set spell'"        # Spell checking in email compose
+set editor="vim -c 'set spell' -c 'set tw=79'"        # Spell checking in email compose
 
 set header_cache =~/.mutt/cache/headers
 set message_cachedir=~/.mutt/cache/bodies
