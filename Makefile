@@ -27,7 +27,7 @@ i3:
 .PHONY: i3
 dunst:
 	mkdir -p ${HOME}/.config/dunst/
-	ln -fs $(DOTFILES)/dunstrc  ${HOME}/.config/dunst/.dunstrc
+	ln -fs $(DOTFILES)/dunstrc  ${HOME}/.config/dunst/dunstrc
 .PHONY: clean
 clean:
 	rm ${HOME}/.muttrc
