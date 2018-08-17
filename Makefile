@@ -1,7 +1,7 @@
 DOTFILES := $(shell pwd)
 
 .PHONY: all
-all: mutt xterm vim i3 screen redshift
+all: mutt xterm vim i3 screen redshift dunst
 .PHONY: mutt
 mutt:
 	ln -fs $(DOTFILES)/muttrc ${HOME}/.muttrc
@@ -24,6 +24,10 @@ i3:
 	mkdir -p ${HOME}/.config/i3/
 	ln -fs $(DOTFILES)/i3_config  ${HOME}/.config/i3/config
 	ln -fs $(DOTFILES)/i3_status.conf  ${HOME}/.config/i3/status.conf
+.PHONY: i3
+dunst:
+	mkdir -p ${HOME}/.config/dunst/
+	ln -fs $(DOTFILES)/dunstrc  ${HOME}/.config/dunst/.dunstrc
 .PHONY: clean
 clean:
 	rm ${HOME}/.muttrc
