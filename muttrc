@@ -132,4 +132,7 @@ mono underline underline
 mono indicator reverse
 
 # Source personal things
-source ~/.mutt/personal.muttrc
+source ~/.mutt/account.redhat
+macro index,pager <F4> ":source ~/.mutt/account.gmail<enter><change-folder>=INBOX/<enter>"
+
+set print_command="$HOME/.mutt/mutt_print.sh"

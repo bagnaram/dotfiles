@@ -30,7 +30,7 @@ bindsym $mod+Shift+q kill
 hide_edge_borders smart
 for_window [class="^.*"] border pixel 2
 
-for_window [class="Code"] floating enable
+#for_window [class="Code"] floating enable
 for_window [class="urxvt"] border pixel 2
 for_window [class="Steam"] floating enable
 for_window [class="Virt-viewer"] floating enable
@@ -182,6 +182,7 @@ bindsym $mod+r mode "resize"
 
 bar {   position top 
         status_command i3status
+#        i3bar_command i3bar -t
         colors {
       background #002b36
       statusline #839496
@@ -206,7 +207,7 @@ client.urgent           #002b36 #dc322f #fdf6e3 #002b36
 # use the same background as slim (login manager)
 # this file is an alias to something in /home/jessie/Pictures
 
-exec redshift
+exec redshift-gtk -l 32.7577:-97.3586
 exec variety
 
 # run the merge for good colors
