@@ -10,3 +10,7 @@
 [submodule "vim/bundle/Dockerfile"]
 	path = vim/bundle/Dockerfile
 	url = https://github.com/ekalinin/Dockerfile.vim.git
+  
+[submodule "mutt/dracula"]
+	path = mutt/dracula
+	url = https://github.com/dracula/mutt.git

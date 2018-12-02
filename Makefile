@@ -4,8 +4,8 @@ DOTFILES := $(shell pwd)
 all: mutt xterm vim i3 screen redshift dunst
 .PHONY: mutt
 mutt:
-	ln -fs $(DOTFILES)/muttrc ${HOME}/.muttrc
-	ln -fs $(DOTFILES)/mailcap ${HOME}/.mailcap
+	if [ ! -d "${HOME}/.mutt" ]; then ln -fs $(DOTFILES)/mutt ${HOME}/.mutt; fi
+
 .PHONY: xterm
 xterm:
 	ln -fs $(DOTFILES)/Xdefaults ${HOME}/.Xdefaults
