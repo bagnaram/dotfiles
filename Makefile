@@ -7,7 +7,7 @@ all: mutt xterm vim i3 screen redshift dunst
 ohmyzsh:
 	if [ ! -d "${HOME}/.zshrc" ]; then \
 	  ln -fs $(DOTFILES)/zshrc ${HOME}/.zshrc; \
-	  sed -i '1iexport ZSH="$(DOTFILES)/zsh"' $(DOTFILES)/zshrc; \ # Add path to ohmyZSH installation
+	  sed -i '1iexport ZSH="$(DOTFILES)/zsh"' $(DOTFILES)/zshrc; \ 
 	fi; 
 
 .PHONY: mutt
