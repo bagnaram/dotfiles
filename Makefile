@@ -2,6 +2,14 @@ DOTFILES := $(shell pwd)
 
 .PHONY: all
 all: mutt xterm vim i3 screen redshift dunst
+
+.PHONY: ohmyzsh
+ohmyzsh:
+	if [ ! -d "${HOME}/.zshrc" ]; then \
+	  ln -fs $(DOTFILES)/zshrc ${HOME}/.zshrc; \
+	  echo "export ZSH=\"$(DOTFILES)/zsh\"" >> $(DOTFILES)/zshrc; \
+	fi; 
+
 .PHONY: mutt
 mutt:
 	if [ ! -d "${HOME}/.mutt" ]; then ln -fs $(DOTFILES)/mutt ${HOME}/.mutt; fi

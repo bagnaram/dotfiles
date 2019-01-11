@@ -14,3 +14,6 @@
 [submodule "mutt/dracula"]
 	path = mutt/dracula
 	url = https://github.com/dracula/mutt.git
+[submodule "zsh"]
+	path = zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git

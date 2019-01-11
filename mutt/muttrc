@@ -33,6 +33,8 @@ set uncollapse_jump                        # don't collapse on an unread message
 set sort_re                                # thread based on regex
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 
+set recall=no
+
 
 
 ## Theme kindly inspired from
@@ -137,7 +139,7 @@ set mailcap_path =~/.mutt/mailcap
 
 # Source personal things
 source ~/.mutt/account.redhat
-macro index,pager <F4> ":source ~/.mutt/account.gmail<enter><change-folder>=INBOX/<enter>"
+macro index,pager <F4> ":source ~/.mutt/account.fastmail<enter><change-folder>=INBOX/<enter>"
 
 set print_command="$HOME/.mutt/mutt_print.sh"
 
