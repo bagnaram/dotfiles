@@ -96,5 +96,3 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export ZSH="/home/mbagnara/build/dotfiles/zsh"
-export ZSH="/home/mbagnara/build/dotfiles/zsh"
