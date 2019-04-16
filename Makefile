@@ -36,6 +36,9 @@ i3:
 dunst:
 	mkdir -p ${HOME}/.config/dunst/
 	ln -fs $(DOTFILES)/dunstrc  ${HOME}/.config/dunst/dunstrc
+.PHONY: crontab
+crontab:
+	(crontab -l ; cat ${DOTFILES}/cron/crontab)| crontab -
 .PHONY: clean
 clean:
 	rm ${HOME}/.muttrc

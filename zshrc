@@ -1,3 +1,4 @@
+export ZSH="/home/mbagnara/build/dotfiles/zsh"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -64,6 +65,7 @@ plugins=(
   vi-mode
   screen
   pass
+  oc
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -96,3 +98,4 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+xinput set-prop 12 300 0.5
