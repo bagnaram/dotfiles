@@ -98,4 +98,5 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-xinput set-prop 12 300 0.5
+MOUSEID=$(xinput | awk '/SynPS/{gsub("id=","",$6); print $6}')
+xinput set-prop $MOUSEID 301 0.5
