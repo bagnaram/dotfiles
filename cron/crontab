@@ -1,2 +1,2 @@
-*/5 * * * * DOTFILES/traffic.sh
+*/5 * * * * DOTFILES/cron/traffic.sh
 
