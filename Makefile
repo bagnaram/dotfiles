@@ -38,6 +38,7 @@ dunst:
 	ln -fs $(DOTFILES)/dunstrc  ${HOME}/.config/dunst/dunstrc
 .PHONY: crontab
 crontab:
+	sed -i "s#DOTFILES#${DOTFILES}#g" ${DOTFILES}/cron/crontab
 	(crontab -l ; cat ${DOTFILES}/cron/crontab)| crontab -
 .PHONY: systemd
 systemd:

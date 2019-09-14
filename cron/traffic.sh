@@ -4,7 +4,7 @@
 # Displays a a notification when percentage is critically low.
 # Relies on notify-send.sh, bundled with https://github.com/bagnaram/hotkey-ctl
 
-acpiV=$(acpi)
+acpiV=$(acpi | grep zero)
 value=$(echo $acpiV | cut -d " " -f 4 | sed -e 's/%//' | sed -e 's/,//')
 con=$(echo $acpiV | cut -d " " -f 3 | sed -e 's/,//')
 
