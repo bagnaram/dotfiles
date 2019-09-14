@@ -138,9 +138,10 @@ set mailcap_path =~/.mutt/mailcap
 #mono indicator reverse
 
 # Source personal things
-source ~/.mutt/account.redhat
-macro index,pager <F4> ":source ~/.mutt/account.fastmail<enter><change-folder>=INBOX/<enter>"
+source ~/.mutt/account.fastmail
+macro index,pager <F4> ":source ~/.mutt/account.redhat<enter><change-folder>=INBOX/<enter>"
 
 set print_command="$HOME/.mutt/mutt_print.sh"
 
 source ~/.mutt/dracula/dracula.muttrc
+

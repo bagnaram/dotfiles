@@ -1,4 +1,4 @@
-export ZSH="/home/mbagnara/build/dotfiles/zsh"
+export ZSH="/home/bagnaramatt/dotfiles/zsh"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -98,5 +98,6 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-MOUSEID=$(xinput | awk '/SynPS/{gsub("id=","",$6); print $6}')
-xinput set-prop $MOUSEID 301 0.5
+#MOUSEID=$(xinput | awk '/Touchpad/{gsub("id=","",$6); print $6}')
+#xinput set-prop $MOUSEID 316 0.5
+export KEYTIMEOUT=1

@@ -39,6 +39,12 @@ dunst:
 .PHONY: crontab
 crontab:
 	(crontab -l ; cat ${DOTFILES}/cron/crontab)| crontab -
+.PHONY: systemd
+systemd:
+	mkdir -p ${HOME}/.config/systemd/
+	if [ ! -d "${HOME}/.config/systemd/user.control/" ]; then ln -fs $(DOTFILES)/systemd ${HOME}/.config/systemd/user.control; fi
+	systemctl --user enable battery@`whoami`.service
+	systemctl --user start battery@`whoami`.service
 .PHONY: clean
 clean:
 	rm ${HOME}/.muttrc
