@@ -1,7 +1,7 @@
 DOTFILES := $(shell pwd)
 
 .PHONY: all
-all: mutt xterm vim i3 screen redshift dunst
+all: mutt xterm vim i3 screen redshift dunst doom
 
 .PHONY: ohmyzsh
 ohmyzsh:
@@ -20,6 +20,9 @@ xterm:
 .PHONY: screen
 screen:
 	ln -fs $(DOTFILES)/screenrc ${HOME}/.screenrc
+.PHONY: doom
+doom:
+	if [ ! -d "${HOME}/.doom.d" ]; then ln -fs $(DOTFILES)/.doom.d ${HOME}/.doom.d; fi
 .PHONY: vim
 vim:
 	if [ ! -d "${HOME}/.vim" ]; then ln -fs $(DOTFILES)/vim ${HOME}/.vim; fi
@@ -56,4 +59,4 @@ clean:
 	rm ${HOME}/.config/i3/config
 	rm ${HOME}/.config/i3/status.conf
 	rm ${HOME}/.zshrc
-
+	rm ${HOME}/.doom.d
