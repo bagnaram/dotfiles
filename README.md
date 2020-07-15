@@ -3,7 +3,7 @@
 ![Screenshot of my desktop](https://bagnaram.github.io/img/desktop.png) 
 
 Dotfiles is a central location that you can store all configuration for most
-software that supports configuration in the home directory. Thi
+software that supports configuration in the home directory.
 
 # General Requirements
 
@@ -23,7 +23,7 @@ The following software packages must be installed:
 2. Enter this directory and pull each of the sub-modules.
  
      ```shell
-     git submodule update --recursive --remote
+     git submodule update --init --recursive
      ```
      
 3. You can either install all of the modules specified in this dotfiles repo.
