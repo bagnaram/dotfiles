@@ -1,12 +1,12 @@
-export ZSH="/home/bagnaramatt/dotfiles/zsh"
+export ZSH=$HOME/.oh-my-zsh
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+  export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="fishy"
+ZSH_THEME="dracula-pro"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -101,3 +101,8 @@ fi
 #MOUSEID=$(xinput | awk '/Touchpad/{gsub("id=","",$6); print $6}')
 #xinput set-prop $MOUSEID 316 0.5
 export KEYTIMEOUT=1
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+bindkey -v
+

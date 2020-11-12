@@ -1,0 +1,29 @@
+#+TITLE: dotfiles
+These are my dotfiles, or in other words, a collection of configuration for
+various applications. All stored in a single repository. The idea is you clone a
+single repo, and can install the configuration using various make targets.
+
+[[https://bagnaram.github.io/img/desktop.png]]
+
+* Installation
+1. Clone this repository
+#+BEGIN_SRC sh :results verbatim :exports both
+  git clone https://github.com/bagnaram/dotfiles.git
+#+END_SRC
+2. Enter the cloned directory and pull each of the sub-modules
+#+BEGIN_SRC sh :results verbatim :exports both
+  git submodule update --init --recursive
+#+END_SRC
+3. You can either install all of the modules specified in this dotfiles repo. It
+   will create symlinks to all the configuration files within the dotfiles
+#+BEGIN_SRC sh :results verbatim :exports both
+  make all
+#+END_SRC
+NOTE: you can also specify individual dotfiles using:
+#+BEGIN_SRC sh :results verbatim :exports both
+  make mutt
+  make vim
+#+END_SRC
+
+* To Customize:
+Simply modify the files within the dotfiles directory
