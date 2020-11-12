@@ -7,30 +7,29 @@ single repo, and can install the configuration using various make targets.
 
 * Installation
 1. Clone this repository
-    #+BEGIN_SRC sh :results verbatim :exports both
-    git clone https://github.com/bagnaram/dotfiles.git
-    #+END_SRC
+   #+BEGIN_SRC sh :results verbatim :exports both
+   git clone https://github.com/bagnaram/dotfiles.git
+   #+END_SRC
 2. Enter the cloned directory and pull each of the sub-modules
-    #+BEGIN_SRC sh :results verbatim :exports both
-    git submodule update --init --recursive
-    #+END_SRC
-    #+RESULTS:
-    : Submodule path 'mutt/dracula': checked out '6a521416618ffb677157f56e61a7bc3d7cef4d03'
-    : Submodule path 'vim/bundle/Dockerfile': checked out 'bf29af1c79df21aefd3f68660cc8c57a78f14021'
-    : Submodule path 'vim/bundle/ctrlp': checked out '2e773fd8c7548526853fff6ee2e642eafbbe3d04'
-    : Submodule path 'vim/bundle/tabular': checked out '339091ac4dd1f17e225fe7d57b48aff55f99b23a'
-    : Submodule path 'vim/pathogen': checked out 'e9fb0914dba5bdfe2feaa364dda2e9495c5620a2'
-    : Submodule path 'zsh': checked out '32338fd40cae45c775dadc34ae05476811a3834b'
+   #+BEGIN_SRC sh :results verbatim :exports both
+   git submodule update --init --recursive
+   #+END_SRC
+   #+RESULTS:
+   : Submodule path 'mutt/dracula': checked out '6a521416618ffb677157f56e61a7bc3d7cef4d03'
+   : Submodule path 'vim/bundle/Dockerfile': checked out 'bf29af1c79df21aefd3f68660cc8c57a78f14021'
+   : Submodule path 'vim/bundle/ctrlp': checked out '2e773fd8c7548526853fff6ee2e642eafbbe3d04'
+   : Submodule path 'vim/bundle/tabular': checked out '339091ac4dd1f17e225fe7d57b48aff55f99b23a'
+   : Submodule path 'vim/pathogen': checked out 'e9fb0914dba5bdfe2feaa364dda2e9495c5620a2'
+   : Submodule path 'zsh': checked out '32338fd40cae45c775dadc34ae05476811a3834b'
 3. You can either install all of the modules specified in this dotfiles repo. It
    will create symlinks to all the configuration files within the dotfiles
-    #+BEGIN_SRC sh :results verbatim :exports both
-    make all
-    #+END_SRC
-    NOTE: you can also specify individual dotfiles using:
-    #+BEGIN_SRC sh :results verbatim :exports both
-    make mutt
-    make vim
-    #+END_SRC
-
+   #+BEGIN_SRC sh :results verbatim :exports both
+   make all
+   #+END_SRC
+   NOTE: you can also specify individual dotfiles using:
+   #+BEGIN_SRC sh :results verbatim :exports both
+   make mutt
+   make vim
+   #+END_SRC
 * To Customize:
 Simply modify the files within the dotfiles directory
