@@ -1,3 +1,5 @@
+export ZSH="/home/mbagnara/dotfiles/zsh"
+export ZSH="/home/mbagnara/dotfiles/zsh"
 export ZSH=$HOME/.oh-my-zsh
 # If you come from bash you might have to change your $PATH.
   export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -104,5 +106,6 @@ export KEYTIMEOUT=1
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
+export MOZ_ENABLE_WAYLAND=1
 bindkey -v
-
+stty icrnl

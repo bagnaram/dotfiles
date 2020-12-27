@@ -56,3 +56,5 @@
 
 (after! treemacs
  (treemacs-load-theme "doom-colors"))
+
+(add-to-list 'term-file-aliases '("alacritty" . "xterm"))

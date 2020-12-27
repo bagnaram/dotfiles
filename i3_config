@@ -11,18 +11,26 @@ set $mod Mod4
 
 font pango:Monospace 8
 
+input * {
+  xkb_layout "us"
+  xkb_variant "dvorak"
+}
+
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, its unicode glyph coverage is limited, the old
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
+set $menu 'rofi -combi-modi window,drun,ssh -theme solarized -font "hermit 14" -show combi -icon-theme "Adwaita" -show-icons'
+
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal --hide-menubar --hide-scrollbar
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -43,7 +51,7 @@ assign [class="Firefox"] 3:www
 assign [class="mutt"] 2:mutt
 
 # lock screen
-bindsym $mod+q exec i3lock -c 111111
+# bindsym $mod+q exec i3lock -c 111111
 
 # change focus
 #bindsym $mod+j focus left
@@ -51,8 +59,9 @@ bindsym $mod+q exec i3lock -c 111111
 #bindsym $mod+semicolon focus right
 
 # move to monitor
-bindsym $mod+Shift+Left move workspace to output left
-bindsym $mod+Shift+Right move workspace to output right
+bindsym $mod+Control+Shift+Left move workspace to output left
+bindsym $mod+Control+Shift+Right move workspace to output right
+bindsym $mod+Control+Shift+Up move workspace to output up
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -133,8 +142,7 @@ bindsym XF86MonBrightnessUp exec ~/hotkey-ctl/brightness.sh up # increase screen
 bindsym XF86MonBrightnessDown exec ~/hotkey-ctl/brightness.sh down # decrease screen brightness
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec /usr/bin/dmenu_run
-bindsym $mod+d exec rofi -show run -font "hermit 14" -fg "#FFFFFF" -bg "#000000" -hlfg "#ffb964" -hlbg "#000000" -o 85
+bindsym $mod+d exec $menu
 
 # Screenshots
 # Screenshot fullscreen
@@ -149,7 +157,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -175,45 +184,37 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+
 bindsym $mod+r mode "resize"
 
 # pick color scheme for i3
-
-
-bar {   position top 
-        status_command i3status
-#        i3bar_command i3bar -t
-        colors {
-      background #002b36
-      statusline #839496
-      separator  #586e75
-      focused_workspace  #b58900 #b58900 #002b36
-      active_workspace   #586e75 #586e75 #002b36
-      inactive_workspace #073642 #002b36 #839496
-      urgent_workspace   #dc322f #dc322f #fdf6e3
-        }   
-}
-
-#client.focused          #002b36 #586e75 #fdf6e3 #268bd2
-client.focused          #002b36 #EDF1F5 #fdf6e3 #268bd2
-client.focused_inactive #002b36 #073642 #839496 #073642
-client.unfocused        #002b36 #073642 #839496 #073642
-client.urgent           #002b36 #dc322f #fdf6e3 #002b36
-
-
 
 # auto run commands
 # set background
 # use the same background as slim (login manager)
 # this file is an alias to something in /home/jessie/Pictures
+bar {
+    position top
 
-exec redshift-gtk -l 32.7577:-97.3586
-exec variety
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    swaybar_command waybar
 
-# run the merge for good colors
-exec xrdb -merge ~/.Xresources
-exec xrdb -merge ~/.Xdefaults
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
 
 # startup programs
-exec --no-starup-id i3-msg 'workspace "1:shell"; exec rxvt-unicode;'
-#exec --no-startup-id i3msg 'workspace 3; exec rxvt-unicode;'
+exec gammastep-indicator &

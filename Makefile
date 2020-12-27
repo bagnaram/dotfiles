@@ -27,6 +27,14 @@ doom:
 vim:
 	if [ ! -d "${HOME}/.vim" ]; then ln -fs $(DOTFILES)/vim ${HOME}/.vim; fi
 	if [ ! -d "${HOME}/.vim/autoload" ]; then ln -fs $(DOTFILES)/vim/pathogen/autoload ${HOME}/.vim/autoload; fi
+.PHONY: mako
+mako:
+	mkdir -p ${HOME}/.config/mako
+	if [ ! -d "${HOME}/.config/mako/config" ]; then ln -fs $(DOTFILES)/mako.ini ${HOME}/.config/mako/config; fi
+.PHONY: gammastep
+gammastep:
+	mkdir -p ${HOME}/.config/gammastep
+	if [ ! -d "${HOME}/.config/gammastep/config.ini" ]; then ln -fs $(DOTFILES)/gammastep.ini ${HOME}/.config/gammastep/config.ini; fi
 .PHONY: redshift
 redshift:
 	if [ ! -d "${HOME}/.config/redshift.conf" ]; then ln -fs $(DOTFILES)/redshift.conf ${HOME}/.config/redshift.conf; fi
@@ -39,6 +47,15 @@ i3:
 dunst:
 	mkdir -p ${HOME}/.config/dunst/
 	ln -fs $(DOTFILES)/dunstrc  ${HOME}/.config/dunst/dunstrc
+.PHONY: rofi
+rofi:
+	mkdir -p ${HOME}/.config/rofi/
+	ln -fs $(DOTFILES)/rofi/config.rasi  ${HOME}/.config/rofi
+.PHONY: alacritty
+alacritty:
+	mkdir -p ${HOME}/.config/alacritty/
+	touch ${HOME}/.config/alacritty/alacritty.yml
+	yq w -i ${HOME}/.config/alacritty/alacritty.yml import[+] $(DOTFILES)/alacritty/dracula.yml
 .PHONY: crontab
 crontab:
 	sed -i "s#DOTFILES#${DOTFILES}#g" ${DOTFILES}/cron/crontab
