@@ -11,9 +11,13 @@ set $mod Mod4
 
 font pango:Monospace 8
 
-input * {
+input  1:1:AT_Translated_Set_2_keyboard {
   xkb_layout "us"
   xkb_variant "dvorak"
+}
+
+input 1133:4136:Logitech_M570 {
+  scroll_factor 2
 }
 
 # Before i3 v4.8, we used to recommend this one as the default:

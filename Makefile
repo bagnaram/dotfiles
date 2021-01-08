@@ -1,7 +1,7 @@
 DOTFILES := $(shell pwd)
 
 .PHONY: all
-all: mutt xterm vim i3 screen redshift dunst doom
+all: mutt xterm vim i3 screen redshift dunst doom waybar rofi kanshi
 
 .PHONY: ohmyzsh
 ohmyzsh:
@@ -43,10 +43,17 @@ i3:
 	mkdir -p ${HOME}/.config/i3/
 	ln -fs $(DOTFILES)/i3_config  ${HOME}/.config/i3/config
 	ln -fs $(DOTFILES)/i3_status.conf  ${HOME}/.config/i3/status.conf
-.PHONY: i3
+.PHONY: dunst
 dunst:
 	mkdir -p ${HOME}/.config/dunst/
 	ln -fs $(DOTFILES)/dunstrc  ${HOME}/.config/dunst/dunstrc
+.PHONY: kanshi
+kanshi:
+	ln -fs $(DOTFILES)/kanshi  ${HOME}/.config/kanshi
+	ln -fs $(DOTFILES)/systemd/kanshi.service  ${HOME}/.config/systemd/user/kanshi.service
+.PHONY: waybar
+waybar:
+	ln -fs $(DOTFILES)/waybar  ${HOME}/.config/waybar
 .PHONY: rofi
 rofi:
 	mkdir -p ${HOME}/.config/rofi/
