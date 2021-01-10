@@ -54,6 +54,9 @@ kanshi:
 .PHONY: waybar
 waybar:
 	ln -fs $(DOTFILES)/waybar  ${HOME}/.config/waybar
+.PHONY: mako
+mako:
+	ln -fs $(DOTFILES)/mako  ${HOME}/.config/mako
 .PHONY: rofi
 rofi:
 	mkdir -p ${HOME}/.config/rofi/
