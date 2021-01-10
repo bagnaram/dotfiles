@@ -5,6 +5,19 @@ single repo, and can install the configuration using various make targets.
 
 [[https://bagnaram.github.io/img/desktop.png]]
 
+* Requirements
+I am using the following configuration:
+** emacs
+** sway
+Wayland wloots based compositor
+** [[https://github.com/davatorium/rofi][rofi]]
+A Wayland launcher/menu
+** [[https://github.com/emersion/mako][mako]]
+Wayland notification daemon
+** [[https://github.com/emersion/kanshi][kanshi]]
+Monitor hotplugging in Wayland
+** [[https://github.com/Alexays/Waybar][waybar]]
+Wayland notification bar
 * Installation
 1. Clone this repository
    #+BEGIN_SRC sh :results verbatim :exports both
