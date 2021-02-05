@@ -26,7 +26,7 @@ input 1133:4136:Logitech_M570 {
 # clear in small sizes. However, its unicode glyph coverage is limited, the old
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
-set $menu 'rofi -combi-modi window,drun,ssh -theme solarized -font "hermit 14" -show combi -icon-theme "Adwaita" -show-icons'
+set $menu 'rofi -show combi -show-icons'
 
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
@@ -48,10 +48,12 @@ for_window [class="Steam"] floating enable
 for_window [class="Virt-viewer"] floating enable
 for_window [class="VirtualBox"] floating enable
 for_window [class="vlc"] floating enable
+for_window [title="Firefox — Sharing Indicator"] floating enable
+for_window [title="NoScript XSS Warning — Mozilla Firefox"] floating enable
 for_window [class="Firefox" tiling] border pixel 0
 
 # ensure firefox on WS 3
-assign [class="Firefox"] 3:www
+assign [class="Firefox"] 3:
 assign [class="mutt"] 2:mutt
 
 # lock screen
@@ -112,22 +114,22 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1:shell
+bindsym $mod+1 workspace 1:shell 
 bindsym $mod+2 workspace 2:mutt
-bindsym $mod+3 workspace 3:www
-bindsym $mod+4 workspace 4
+bindsym $mod+3 workspace 3:
+bindsym $mod+4 workspace 4:
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace 0
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1:shell
-bindsym $mod+Shift+2 move container to workspace 2:mutt
-bindsym $mod+Shift+3 move container to workspace 3:www
-bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+1 move container to workspace 1:shell ; workspace 1:shell 
+bindsym $mod+Shift+2 move container to workspace 2:mutt; workspace 2:mutt
+bindsym $mod+Shift+3 move container to workspace 3:; workspace 3:
+bindsym $mod+Shift+4 move container to workspace 4:; workspace 4:
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
@@ -199,6 +201,9 @@ client.background       #F8F8F2
 
 bindsym $mod+r mode "resize"
 
+mouse_warping container
+focus_follows_mouse always
+
 # pick color scheme for i3
 
 # auto run commands
@@ -222,3 +227,4 @@ bar {
 
 # startup programs
 exec gammastep-indicator &
+exec kanshi &

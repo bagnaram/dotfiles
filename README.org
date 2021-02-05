@@ -7,9 +7,13 @@ single repo, and can install the configuration using various make targets.
 
 * Requirements
 I am using the following configuration:
+** Alacritty terminal
+** Pipewire
+wlroots support for WebRTC
 ** emacs
+doom-emacs
 ** sway
-Wayland wloots based compositor
+Wayland wlroots based compositor
 ** [[https://github.com/davatorium/rofi][rofi]]
 A Wayland launcher/menu
 ** [[https://github.com/emersion/mako][mako]]

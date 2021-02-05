@@ -404,6 +404,7 @@ label:focus {
 #custom-keyboard-layout {
     background-color: #66cc99;
     color: #2a5c45;
+    font-family: "openmoji";
 }
 
 #mpd.disconnected {
