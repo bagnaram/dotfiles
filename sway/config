@@ -18,6 +18,7 @@ input  1:1:AT_Translated_Set_2_keyboard {
 
 input 1133:4136:Logitech_M570 {
   scroll_factor 2
+  pointer_accel 0.7
 }
 
 # Before i3 v4.8, we used to recommend this one as the default:
@@ -177,7 +178,7 @@ mode "resize" {
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym equal resize set width 50 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -224,6 +225,16 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Breeze-Dark'
+    #gsettings set $gnome-schema icon-theme 'Your icon theme'
+    gsettings set $gnome-schema cursor-theme 'macOSBigSur'
+    #gsettings set $gnome-schema font-name 'Your font name'
+}
+seat seat0 xcursor_theme macOSBigSur 48
 
 # startup programs
 exec gammastep-indicator &

@@ -73,6 +73,8 @@ window#waybar.chromium {
 #backlight,
 #network,
 #pulseaudio,
+#day,
+#night,
 #custom-media,
 #custom-keyboard-layout,
 #tray,
@@ -399,6 +401,18 @@ label:focus {
 #idle_inhibitor.activated {
     background-color: #ecf0f1;
     color: #2d3436;
+}
+
+#custom-daytime.night {
+    background-color: #2d3436;
+    color: #2980b9;
+    font-family: "openmoji";
+}
+
+#custom-daytime.day {
+    background-color: #ffa000;
+    color: #ecf0f1;
+    font-family: "openmoji";
 }
 
 #custom-keyboard-layout {

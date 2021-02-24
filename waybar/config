@@ -11,7 +11,7 @@
 
     "modules-right": ["custom/keyboard-layout", "pulseaudio", "network", "cpu",
     "memory", "temperature", "backlight", "battery",
-    "battery#bat2", "clock", "tray"],
+    "battery#bat2", "custom/daytime", "clock", "tray"],
 
     // Modules configuration
     // "sway/workspaces": {
@@ -35,6 +35,14 @@
     "custom/keyboard-layout": {
     "exec": "~/.config/waybar/sway_keyboard_layout.sh",
     "tooltip": false
+    },
+    "custom/daytime": {
+    "exec": "~/.config/waybar/day_night_cycle.sh get",
+    "on-click": "~/.config/waybar/day_night_cycle.sh set",
+    "format": " {} ",
+    "return-type": "",
+    "signal": 1,
+    "interval": "once"
     },
     "idle_inhibitor": {
         "format": "{icon}",
