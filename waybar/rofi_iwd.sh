@@ -31,10 +31,13 @@ case $script in
     rofi_*)
         label_interface=""
         menu_interface="rofi -m -1 -l 3 -theme solarized -dmenu -i"
+        menu_interface="wofi -d -I"
         label_ssid=""
         menu_ssid="rofi -m -1 -l 10 -theme solarized -dmenu -i"
+        menu_ssid="wofi -d -I"
         label_psk=""
         menu_psk="rofi -m -1 -l 1 -theme solarized -dmenu -i"
+        menu_psk="wofi -d -I"
         ;;
     *)
         printf "%s\n" "$help"

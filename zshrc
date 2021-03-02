@@ -2,7 +2,7 @@ export ZSH="/home/mbagnara/dotfiles/zsh"
 export ZSH="/home/mbagnara/dotfiles/zsh"
 export ZSH=$HOME/.oh-my-zsh
 # If you come from bash you might have to change your $PATH.
-  export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -81,9 +81,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='vi'
 else
-  export EDITOR='vim'
+  export EDITOR='vi'
 fi
 
 # Compilation flags
@@ -100,8 +100,15 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#MOUSEID=$(xinput | awk '/Touchpad/{gsub("id=","",$6); print $6}')
-#xinput set-prop $MOUSEID 316 0.5
+#
+## Add bindings to the vicmd keymap
+
+# DVORAK keys
+bindkey -a h backward-char
+bindkey -a s forward-char
+bindkey -a t down-history
+bindkey -a n up-history
+
 export KEYTIMEOUT=1
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin

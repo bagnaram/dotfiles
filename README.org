@@ -14,8 +14,8 @@ wlroots support for WebRTC
 doom-emacs
 ** sway
 Wayland wlroots based compositor
-** [[https://github.com/davatorium/rofi][rofi]]
-A Wayland launcher/menu
+** [[https://github.com/davatorium/rofi][wofi]]
+A Wayland launcher/menu with GTK styling
 ** [[https://github.com/emersion/mako][mako]]
 Wayland notification daemon
 ** [[https://github.com/emersion/kanshi][kanshi]]

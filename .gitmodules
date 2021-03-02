@@ -17,9 +17,6 @@
 [submodule "zsh"]
 	path = zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "rofi"]
-	path = rofi
-	url = https://github.com/dracula/rofi
 [submodule "alacritty"]
 	path = alacritty
 	url = https://github.com/dracula/alacritty.git

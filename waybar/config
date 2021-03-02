@@ -1,6 +1,6 @@
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
@@ -11,29 +11,29 @@
 
     "modules-right": ["custom/keyboard-layout", "pulseaudio", "network", "cpu",
     "memory", "temperature", "backlight", "battery",
-    "battery#bat2", "custom/daytime", "clock", "tray"],
+    "custom/daytime", "clock", "tray"],
 
     // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
-    // },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}  {icon}",
+        "format-icons": {
+            "shell": "    ",
+            "2": "",
+//            "3": "",
+            "4": "",
+            "urgent": "",
+            "focused": "   ",
+            "default": "   "
+        }
+    },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
     "custom/keyboard-layout": {
     "exec": "~/.config/waybar/sway_keyboard_layout.sh",
+    "interval": "once",
     "tooltip": false
     },
     "custom/daytime": {
@@ -43,13 +43,6 @@
     "return-type": "",
     "signal": 1,
     "interval": "once"
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
     },
     "tray": {
         // "icon-size": 21,
@@ -94,9 +87,6 @@
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
@@ -124,17 +114,5 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     }
 }
