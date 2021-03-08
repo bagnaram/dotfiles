@@ -106,8 +106,9 @@ fi
 # DVORAK keys
 bindkey -a h backward-char
 bindkey -a s forward-char
-bindkey -a t down-history
-bindkey -a n up-history
+bindkey -a t down-line-or-history
+bindkey -a n up-line-or-history
+bindkey -a r vi-repeat-search
 
 export KEYTIMEOUT=1
 export GOPATH=$HOME/go
@@ -115,5 +116,8 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 export MOZ_ENABLE_WAYLAND=1
 export XDG_CURRENT_DESKTOP=sway
+QT_QPA_PLATFORMTHEME=qt5ct
 bindkey -v
 stty icrnl
+
+alias mutt="TERM=xterm-256color mutt"

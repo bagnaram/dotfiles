@@ -29,7 +29,7 @@ input 1133:4136:Logitech_M570 {
 # font, it doesn’t scale on retina/hidpi displays.
 set $menu 'wofi -I -i --show drun,run'
 
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/Sway_Wallpaper_CaveCanem_1920x1080.png fill
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -54,8 +54,8 @@ for_window [title="NoScript XSS Warning — Mozilla Firefox"] floating enable
 for_window [class="Firefox" tiling] border pixel 0
 
 # ensure firefox on WS 3
-assign [class="Firefox"] 3:www
-assign [class="emacs"] 2:emacs
+assign [app_id="firefox"] 3:www
+assign [app_id="emacs"] 2:emacs
 
 # lock screen
 # bindsym $mod+q exec i3lock -c 111111
@@ -231,7 +231,7 @@ set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Dracula'
-    #gsettings set $gnome-schema icon-theme 'Your icon theme'
+    gsettings set $gnome-schema icon-theme 'Breeze'
     gsettings set $gnome-schema cursor-theme 'macOSBigSur'
     #gsettings set $gnome-schema font-name 'Your font name'
 }
