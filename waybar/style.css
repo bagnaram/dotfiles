@@ -213,8 +213,13 @@ label:focus {
 }
 
 #custom-keyboard-layout {
+    background-image: url("/usr/share/icons/Enlightenment-X/intl/128/flag-us.png");
+    background-size: 25px;
+    padding: 0 10px;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-origin: content-box;
     background-color: #66cc99;
     color: #2a5c45;
     font-family: "openmoji";
 }
-

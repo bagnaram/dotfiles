@@ -2,7 +2,9 @@
 alternative_order text/plain text/html
 
 
-set editor="vim -c 'set spell' -c 'set tw=79'"        # Spell checking in email compose
+#set editor="vim -c 'set spell' -c 'set tw=79'"        # Spell checking in email compose
+set editor=emacsclient
+set edit_headers = yes 
 
 set header_cache =~/.mutt/cache/headers
 set message_cachedir=~/.mutt/cache/bodies
@@ -13,6 +15,10 @@ set markers=no
 
 bind index ( toggle-new
 bind pager N search-opposite
+
+# DVORAK
+bind index t next-entry
+bind index n previous-entry
 
 set sort = threads                         # like gmail
 set sort_aux = reverse-last-date-received  # like gmail
@@ -32,3 +38,9 @@ set print_command="$HOME/.mutt/mutt_print.sh"
 
 source ~/dotfiles/mutt/dracula/dracula.muttrc
 source ~/dotfiles/mutt/account.fastmail
+
+message-hook .                           'unalternative_order *; alternative_order text/plain text/html'
+message-hook '~h "HtmlMimeMail <http://www.phpguru.org/>"' "unalternative_order *; alternative_order text/html text/plain"
+
+macro index,pager <F4> ":source ~/.mutt/account.procore<enter><change-folder>=INBOX/<enter>"
+

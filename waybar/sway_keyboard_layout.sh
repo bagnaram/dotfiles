@@ -15,9 +15,9 @@ layout=`swaymsg --type get_inputs --raw | jq '.[] | select(.type == "keyboard") 
 keyboard_flag() {
   while read -r layout; do
     if [ "$layout" = "English (Dvorak)" ]; then
-      layout_waybar="🇺🇸 DV"
+      layout_waybar="       DV"
     elif [ "$layout" = "English (US)" ]; then
-      layout_waybar="🇸🇪"
+      layout_waybar="  "
     else
       layout_waybar="$DEFAULT_LAYOUT"
     fi
@@ -28,4 +28,4 @@ keyboard_flag() {
 
 
 echo $layout | keyboard_flag
-swaymsg -mrt subscribe '["input"]' | jq -r --unbuffered 'select(.change == "xkb_layout") | .input | select(.type == "keyboard") | .xkb_active_layout_name' | keyboard_flag
+# swaymsg -mrt subscribe '["input"]' | jq -r --unbuffered 'select(.change == "xkb_layout") | .input | select(.type == "keyboard") | .xkb_active_layout_name' | keyboard_flag

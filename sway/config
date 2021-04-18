@@ -58,7 +58,7 @@ assign [app_id="firefox"] 3:www
 assign [app_id="emacs"] 2:emacs
 
 # lock screen
-# bindsym $mod+q exec i3lock -c 111111
+bindsym $mod+l exec swaylock
 
 # move to monitor
 bindsym $mod+Control+Shift+Left move workspace to output left
@@ -213,18 +213,7 @@ focus_follows_mouse always
 # use the same background as slim (login manager)
 # this file is an alias to something in /home/jessie/Pictures
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
     swaybar_command waybar
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
 }
 
 set $gnome-schema org.gnome.desktop.interface

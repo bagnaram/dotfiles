@@ -1,7 +1,7 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+    "height": 32, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
 
@@ -10,7 +10,7 @@
     "modules-center": ["sway/window"],
 
     "modules-right": ["custom/keyboard-layout", "pulseaudio", "network", "cpu",
-    "memory", "temperature", "backlight", "battery",
+    "memory", "battery",
     "custom/daytime", "clock", "tray"],
 
     // Modules configuration
@@ -45,7 +45,7 @@
     "interval": "once"
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 32,
         "spacing": 10
     },
     "clock": {
