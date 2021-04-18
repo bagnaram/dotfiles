@@ -3,7 +3,7 @@ These are my dotfiles, or in other words, a collection of configuration for
 various applications. All stored in a single repository. The idea is you clone a
 single repo, and can install the configuration using various make targets.
 
-[[https://bagnaram.github.io/img/desktop.png]]
+[[desktop.jpg]]
 
 * Requirements
 I am using the following configuration:
