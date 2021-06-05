@@ -114,10 +114,13 @@ export KEYTIMEOUT=1
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
-export MOZ_ENABLE_WAYLAND=1
-export XDG_CURRENT_DESKTOP=sway
-QT_QPA_PLATFORMTHEME=qt5ct
 bindkey -v
 stty icrnl
 
+
 alias mutt="TERM=xterm-256color mutt"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+
+. $HOME/dotfiles/sway/readenv.sh
+
+. $HOME/.aoeu/aoeu.sh

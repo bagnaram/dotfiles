@@ -32,6 +32,9 @@ vim:
 gammastep:
 	mkdir -p ${HOME}/.config/gammastep
 	if [ ! -d "${HOME}/.config/gammastep/config.ini" ]; then ln -fs $(DOTFILES)/gammastep.ini ${HOME}/.config/gammastep/config.ini; fi
+.PHONY: gpg-agent
+gpg-agent:
+	if [ ! -d "${HOME}/.gnupg/gpg-agent.conf" ]; then ln -fs $(DOTFILES)/gpg-agent.conf ${HOME}/.gnupg/gpg-agent.conf; fi
 .PHONY: redshift
 redshift:
 	if [ ! -d "${HOME}/.config/redshift.conf" ]; then ln -fs $(DOTFILES)/redshift.conf ${HOME}/.config/redshift.conf; fi

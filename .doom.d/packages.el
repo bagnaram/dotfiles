@@ -12,6 +12,7 @@
 (package! dockerfile-mode)
 (package! jinja2-mode :recipe
   (:host github :repo "bagnaram/jinja2-mode"))
+(package! pinentry)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

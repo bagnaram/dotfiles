@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: daily
+# key: <dt
+# --
+* `(format-time-string "%m-%d-%Y" (current-time) ))`
+** `(upcase (format-time-string "%A" (time-subtract (current-time) (* 24 3600))))`
+*** 
+** TODAY
+*** 
+** BLOCKAGES:

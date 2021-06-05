@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+ (setq doom-font (font-spec :family "Iosevka" :size 12 :weight 'semi-light)
+       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -35,7 +35,9 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(setq doom-themes-treemacs-theme "doom-colors")
 
+(setq treemacs-read-string-input 'from-minibuffer)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -54,7 +56,62 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
-(after! treemacs
- (treemacs-load-theme "doom-colors"))
+;; These functions allow the color scheme to be switched from light to dark. Can
+;; be called from emacsclient.
+(defun light-theme ()
+  (interactive)
+  (message "Caught signal %S" last-input-event)
+  (load-theme 'doom-solarized-light))
 
-(add-to-list 'term-file-aliases '("alacritty" . "xterm"))
+(defun dark-theme ()
+  (interactive)
+  (message "Caught signal %S" last-input-event)
+  (load-theme 'doom-dracula))
+
+
+;; custom keybindings
+(map! :leader
+      :desc "Window left" "w <left>" #'evil-window-left)
+(map! :leader
+      :desc "Window right" "w <right>" #'evil-window-right)
+(map! :leader
+      :desc "Window up" "w <up>" #'evil-window-up)
+(map! :leader
+      :desc "Window down" "w <down>" #'evil-window-down)
+
+(map! :leader
+      :desc "Window kill" "w k" #'evil-window-quit)
+
+;; unbind the typical keys since we are on dvorak
+(map! :leader
+      :desc "Window left" "w h" nil)
+(map! :leader
+      :desc "Window left" "w H" nil)
+(map! :leader
+      :desc "Window left" "w j" nil)
+(map! :leader
+      :desc "Window left" "w J" nil)
+(map! :leader
+      :desc "Window left" "w l" nil)
+(map! :leader
+      :desc "Window left" "w L" nil)
+(map! :leader
+      :desc "Window left" "w K" nil)
+
+;; mutt email composition
+(add-to-list 'auto-mode-alist '("/mutt" . message-mode))
+
+;; disble spell checking in yaml-lsp mode
+(setq spell-fu-ignore-modes (list 'yaml-mode))
+(remove-hook 'yaml-mode-hook #'spell-fu-mode)
+
+;; disable ws butler as to not remove trailing whitespace from the signature
+(defun my-message-mode-hook ()
+  (ws-butler-mode 0))
+(add-hook 'message-mode-hook 'my-message-mode-hook)
+
+(after! epa
+  (set (if EMACS27+
+           'epg-pinentry-mode
+         'epa-pinentry-mode) ; DEPRECATED `epa-pinentry-mode'
+       nil))

@@ -222,7 +222,11 @@ exec_always {
     gsettings set $gnome-schema gtk-theme 'Dracula'
     gsettings set $gnome-schema icon-theme 'Breeze'
     gsettings set $gnome-schema cursor-theme 'macOSBigSur'
+
     #gsettings set $gnome-schema font-name 'Your font name'
+
+    # Needed for pinentry
+    exec dbus-update-activation-environment --all
 }
 seat seat0 xcursor_theme macOSBigSur 48
 
