@@ -104,6 +104,7 @@
 ;; disble spell checking in yaml-lsp mode
 (setq spell-fu-ignore-modes (list 'yaml-mode))
 (remove-hook 'yaml-mode-hook #'spell-fu-mode)
+(add-hook 'yaml-mode-hook #'spell-fu-mode-disable)
 
 ;; disable ws butler as to not remove trailing whitespace from the signature
 (defun my-message-mode-hook ()
@@ -115,3 +116,6 @@
            'epg-pinentry-mode
          'epa-pinentry-mode) ; DEPRECATED `epa-pinentry-mode'
        nil))
+
+(require 'company-terraform)
+(company-terraform-init)

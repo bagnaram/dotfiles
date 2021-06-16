@@ -1,0 +1,12 @@
+del  Exif.Image.GPSTag
+del  Exif.GPSInfo.GPSVersionID
+del  Exif.GPSInfo.GPSLatitudeRef
+del  Exif.GPSInfo.GPSLatitude
+del  Exif.GPSInfo.GPSLongitudeRef
+del  Exif.GPSInfo.GPSLongitude
+del  Exif.GPSInfo.GPSAltitudeRef
+del  Exif.GPSInfo.GPSAltitude
+del  Exif.GPSInfo.GPSDOP
+del  Exif.GPSInfo.GPSImgDirectionRef
+del  Exif.GPSInfo.GPSImgDirection
+del  Exif.GPSInfo.GPSProcessingMethod

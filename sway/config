@@ -49,7 +49,7 @@ for_window [class="Steam"] floating enable
 for_window [class="Virt-viewer"] floating enable
 for_window [class="VirtualBox"] floating enable
 for_window [class="vlc"] floating enable
-for_window [title="Firefox — Sharing Indicator"] floating enable
+for_window [title="Firefox — Sharing Indicator"] kill
 for_window [title="NoScript XSS Warning — Mozilla Firefox"] floating enable
 for_window [class="Firefox" tiling] border pixel 0
 
@@ -149,7 +149,7 @@ bindsym XF86AudioMicMute exec amixer set Capture toggle # mute mic
 bindsym XF86MonBrightnessUp exec ~/hotkey-ctl/brightness.sh up # increase screen brightness
 bindsym XF86MonBrightnessDown exec ~/hotkey-ctl/brightness.sh down # decrease screen brightness
 
-# start dmenu (a program launcher)
+# start menu
 bindsym $mod+d exec $menu
 
 # Screenshots
