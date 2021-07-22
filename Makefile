@@ -56,6 +56,9 @@ kanshi:
 .PHONY: waybar
 waybar:
 	ln -fs $(DOTFILES)/waybar  ${HOME}/.config/waybar
+.PHONY: pavolume
+pavolume:
+	ln -fs $(DOTFILES)/pavolume  ${HOME}/.config/pavolume
 .PHONY: mako
 mako:
 	ln -fs $(DOTFILES)/mako  ${HOME}/.config/mako

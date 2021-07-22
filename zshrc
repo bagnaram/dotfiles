@@ -1,126 +1,136 @@
-export ZSH="/home/mbagnara/dotfiles/zsh"
-export ZSH="/home/mbagnara/dotfiles/zsh"
-export ZSH=$HOME/.oh-my-zsh
-# If you come from bash you might have to change your $PATH.
+#set -ex
+# export ZSH="/home/mbagnara/.oh-my-zsh"
+#source $ZSH/oh-my-zsh.sh
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="dracula-pro"
+export HISTSIZE=55500
+export SAVEHIST=10000
+setopt append_history # Don't overwrite, append!
+setopt INC_APPEND_HISTORY # Write after each command
+setopt hist_expire_dups_first # Expire duplicate entries first when trimming history.
+setopt hist_fcntl_lock # use OS file locking
+setopt hist_ignore_all_dups # Delete old recorded entry if new entry is a duplicate.
+setopt hist_lex_words # better word splitting, but more CPU heavy
+setopt hist_reduce_blanks # Remove superfluous blanks before recording entry.
+setopt hist_save_no_dups # Don't write duplicate entries in the history file.
+setopt share_history # share history between multiple shells
+setopt HIST_IGNORE_SPACE # Don't record an entry starting with a space.
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# disable Software Flow Control (^s, ^q)
+stty -ixon
+# convert the CR character to LF on input
+stty icrnl
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-patch-dl
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+### End of Zinit's installer chunk
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+zinit ice wait
+zinit snippet OMZP::git
+zinit snippet OMZP::colored-man-pages
+zinit ice wait
+zinit light "b4b4r07/emoji-cli"
+zinit ice wait
+zinit load $HOME/.aoeu/aoeu.sh
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zsh-users/zsh-syntax-highlighting \
+ atload"ZSH_HIGHLIGHT_STYLES[cursor]='fg=#9580ff'" \
+    dracula/zsh-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+zinit ice atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
+zinit light trapd00r/LS_COLORS
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  vi-mode
-  screen
-  pass
-  oc
-)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# Load dracula theme
+zinit ice pick"async.zsh" src"dracula.zsh-theme" # with zsh-async library that's bundled with it.
+zinit light dracula/zsh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vi'
+  export EDITOR='emacsclient'
 else
   export EDITOR='vi'
 fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-## Add bindings to the vicmd keymap
-
-# DVORAK keys
+# ZSH DVORAK key bindings
+bindkey -v
 bindkey -a h backward-char
 bindkey -a s forward-char
 bindkey -a t down-line-or-history
 bindkey -a n up-line-or-history
 bindkey -a r vi-repeat-search
 
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
 export KEYTIMEOUT=1
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
-bindkey -v
-stty icrnl
-
-
-alias mutt="TERM=xterm-256color mutt"
+export KUBESPACE=default
+export EMOJI_CLI_USE_EMOJI=true
+export HISTFILE=~/.zsh_history
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 
-. $HOME/dotfiles/sway/readenv.sh
 
-. $HOME/.aoeu/aoeu.sh
+# Kubectl project plugin
+function _kcl() {
+  if [[ -z "$1" && -z "$2" ]]; then
+    \kubectl -n $KUBESPACE "$@"
+    return 0
+  fi
+  if [[ ! -z "$1" && "$1" == "project" && -z "$2" ]]; then
+      echo "Current project: $KUBESPACE"
+      echo "Usage: $0 project <namespace>"
+      return 1
+  fi
+  if [[ ! -z "$1"  && "$1" == "project" && ! -z $2 ]]; then
+    export KUBESPACE="$2"
+    echo "Set current project to $KUBESPACE"
+    return 0
+  else
+    \kubectl -n $KUBESPACE "$@"
+    return 0
+  fi
+}
+
+# Aliases
+alias mutt="TERM=xterm-256color mutt"
+alias kubectl='_kcl'
+alias grep='grep --color=auto'
+alias ls='ls --color=auto'
+
+
+# Load environment vars into systemd
+export $(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
+
+export CHECKPOINT_DISABLE=ANY_VALUE
+export DISABLE_AUTO_UPDATE=true
+
+# load in history last
+fc -R $HISTFILE
+

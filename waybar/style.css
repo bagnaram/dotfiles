@@ -2,8 +2,8 @@
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: DejaVu Serif, Helvetica, Arial, sans-serif;
+    font-size: 14px;
     min-height: 0;
 }
 
@@ -207,8 +207,8 @@ label:focus {
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: DejaVu Serif, Helvetica, Arial, sans-serif;
+    font-size: 14px;
     min-height: 0;
 }
 
@@ -221,5 +221,4 @@ label:focus {
     background-origin: content-box;
     background-color: #66cc99;
     color: #2a5c45;
-    font-family: "openmoji";
 }

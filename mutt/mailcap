@@ -2,8 +2,8 @@ application/ms-tnef; tnef -w %s
 text/html; elinks -force-html -dump-charset UTF-8 -dump-color-mode 4 -dump 1 %s; nametemplate=%s.html; needsterminal; 
 text/html; elinks -force-html -dump-charset UTF-8 -dump-color-mode 4 -dump 1 %s; nametemplate=%s.html; needsterminal; copiousoutput;
 application/pdf; zathura %s &>/dev/null
-image/JPG; zathura -F -Z %s &>/dev/null
-image/jpeg; zathura -F -Z %s &>/dev/null
+image/JPG; imv %s 
+image/jpeg; imv %s 
 image/gif; zathura -F -Z %s &>/dev/null
 image/png; zathura -F -Z %s &>/dev/null
 application/vnd.oasis.opendocument.text; abiword %s &>/dev/null
