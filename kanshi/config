@@ -1,8 +1,8 @@
-{
+profile {
   output "Sharp Corporation 0x1420 0x00000000" mode 1920x1080@59.933998Hz position 0,0
 }
 
-{
+profile display {
   output "Sharp Corporation 0x1420 0x00000000" mode 1920x1080@59.933998Hz position 374,1440
   output "Acer Technologies V277U TDCAA002852A" mode 2560x1440@59.951000Hz position 0,0
 }

@@ -5,7 +5,7 @@ application/pdf; zathura %s &>/dev/null
 image/JPG; imv %s 
 image/jpeg; imv %s 
 image/gif; zathura -F -Z %s &>/dev/null
-image/png; zathura -F -Z %s &>/dev/null
+image/png; imv %s
 application/vnd.oasis.opendocument.text; abiword %s &>/dev/null
 application/vnd.ms-excel; abiword %s &>/dev/null
 application/vnd.oasis.opendocument.spreadsheet; libreoffice %s &>/dev/null

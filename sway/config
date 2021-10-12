@@ -28,6 +28,7 @@ input 1133:4136:Logitech_M570 {
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 set $menu 'wofi -I -i --show drun,run'
+set $menu 'rofi -combi-modi drun,run -show-icons -show combi'
 
 output * bg ~/Sway_Wallpaper_CaveCanem_1920x1080.png fill
 
@@ -35,7 +36,7 @@ output * bg ~/Sway_Wallpaper_CaveCanem_1920x1080.png fill
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec foot
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -56,6 +57,7 @@ for_window [class="Firefox" tiling] border pixel 0
 # ensure firefox on WS 3
 assign [app_id="firefox"] 3:www
 assign [app_id="emacs"] 2:emacs
+assign [app_id="zoom"] 4
 
 # lock screen
 bindsym $mod+l exec swaylock
@@ -218,18 +220,32 @@ bar {
 
 set $gnome-schema org.gnome.desktop.interface
 
+exec swayidle -w \
+         timeout 60 'swaylock -f -c 000000' \
+         timeout 90 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000' \
+         lock 'swaylock -f -c 000000' \
+         unlock 'kill -KILL $(pgrep swaylock)' \
+
+
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Dracula'
     gsettings set $gnome-schema icon-theme 'Breeze'
     gsettings set $gnome-schema cursor-theme 'macOSBigSur'
 
+
     #gsettings set $gnome-schema font-name 'Your font name'
 
+    # Clipboard management
+    exec wl-paste -t text --watch clipman store
+
     # Needed for pinentry
-    exec dbus-update-activation-environment --all
+    dbus-update-activation-environment --all
+
+    pkill -f "python3 /usr/bin/gammastep-indicator"
+    exec gammastep-indicator &
+    pxill kanshi; exec kanshi
 }
 seat seat0 xcursor_theme macOSBigSur 48
 
-# startup programs
-exec gammastep-indicator &
-exec kanshi &

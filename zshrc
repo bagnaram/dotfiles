@@ -16,6 +16,15 @@ setopt hist_save_no_dups # Don't write duplicate entries in the history file.
 setopt share_history # share history between multiple shells
 setopt HIST_IGNORE_SPACE # Don't record an entry starting with a space.
 
+# Aliases
+setalias() {
+  alias mutt="TERM=screen-256color neomutt"
+  alias kubectl='_kcl'
+  alias grep='grep --color=auto'
+  alias ls='ls --color=auto'
+}
+setalias
+
 
 # disable Software Flow Control (^s, ^q)
 stty -ixon
@@ -48,16 +57,18 @@ zinit snippet OMZP::colored-man-pages
 zinit ice wait
 zinit light "b4b4r07/emoji-cli"
 zinit ice wait
-zinit load $HOME/.aoeu/aoeu.sh
+source $HOME/.aoeu/aoeu.sh
+
+# Obtain color scheme being set
+#
+scheme=`yq eval '.colors | alias' ${HOME}/dotfiles/alacritty/dracula-pro.yml`
 
 zinit wait lucid for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zsh-users/zsh-syntax-highlighting \
- atload"ZSH_HIGHLIGHT_STYLES[cursor]='fg=#9580ff'" \
-    dracula/zsh-syntax-highlighting \
- blockf \
+blockf \
     zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start" \
+atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
 
@@ -71,9 +82,9 @@ zinit light dracula/zsh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='emacsclient'
-else
   export EDITOR='vi'
+else
+  export EDITOR='emacsclient'
 fi
 
 # ZSH DVORAK key bindings
@@ -83,6 +94,9 @@ bindkey -a s forward-char
 bindkey -a t down-line-or-history
 bindkey -a n up-line-or-history
 bindkey -a r vi-repeat-search
+
+# make backspace behave more intuitive in VI mode
+bindkey "^?" backward-delete-char
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
@@ -118,12 +132,37 @@ function _kcl() {
   fi
 }
 
-# Aliases
-alias mutt="TERM=xterm-256color mutt"
-alias kubectl='_kcl'
-alias grep='grep --color=auto'
-alias ls='ls --color=auto'
+function day_night_cycle() {
+  scheme=$(<~/DAY)
+  if [ "$scheme" = "0" ];then
+    theme.sh dracula
+  elif [ "$scheme" = "1" ]; then
+    theme.sh belafonte-day
+  fi
+}
 
+# toggle the zsh syntax highlightinng theme
+TRAPUSR1() {
+  day_night_cycle
+#  if [[ `zinit list | sed 's/\x1b\[[0-9;]*m//g' | grep 'dracula/zsh-syntax-highlighting'` ]]; then
+#    zinit unload zsh-users/zsh-syntax-highlighting > /dev/null
+#    zinit unload dracula/zsh-syntax-highlighting > /dev/null
+#    zinit unload zsh-users/zsh-autosuggestions > /dev/null
+#  else
+#    zinit lucid for \
+#    atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+#        zsh-users/zsh-syntax-highlighting \
+#    atload"ZSH_HIGHLIGHT_STYLES[cursor]='fg=#9580ff'" \
+#        dracula/zsh-syntax-highlighting \
+#    blockf \
+#        zsh-users/zsh-completions \
+#    atload"!_zsh_autosuggest_start" \
+#        zsh-users/zsh-autosuggestions
+#  fi
+  setalias
+}
+
+day_night_cycle
 
 # Load environment vars into systemd
 export $(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
