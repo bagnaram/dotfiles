@@ -1,0 +1,1 @@
+../../waybar/day_night_cycle.sh

@@ -23,15 +23,14 @@ screen:
 .PHONY: doom
 doom:
 	if [ ! -d "${HOME}/.doom.d" ]; then ln -fs $(DOTFILES)/.doom.d ${HOME}/.doom.d; fi
+.PHONY: gammastep
+gammastep:
+	if [ ! -d "${HOME}/.config/gammastep" ]; then ln -fs $(DOTFILES)/gammastep ${HOME}/.config/gammastep; fi
 .PHONY: vim
 vim:
 	if [ ! -d "${HOME}/.vim" ]; then ln -fs $(DOTFILES)/vim ${HOME}/.vim; fi
 	if [ ! -d "${HOME}/.vim/autoload" ]; then ln -fs $(DOTFILES)/vim/pathogen/autoload ${HOME}/.vim/autoload; fi
 .PHONY: mako
-.PHONY: gammastep
-gammastep:
-	mkdir -p ${HOME}/.config/gammastep
-	if [ ! -d "${HOME}/.config/gammastep/config.ini" ]; then ln -fs $(DOTFILES)/gammastep.ini ${HOME}/.config/gammastep/config.ini; fi
 .PHONY: gpg-agent
 gpg-agent:
 	if [ ! -d "${HOME}/.gnupg/gpg-agent.conf" ]; then ln -fs $(DOTFILES)/gpg-agent.conf ${HOME}/.gnupg/gpg-agent.conf; fi
