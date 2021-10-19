@@ -7,7 +7,8 @@ single repo, and can install the configuration using various make targets.
 
 * Requirements
 I am using the following configuration:
-** Alacritty terminal
+** [[https://codeberg.org/dnkl/foot/][foot]]
+A minimalistic terminal emulator using damage tracking
 ** Pipewire
 wlroots support for WebRTC
 ** emacs
@@ -22,6 +23,8 @@ Wayland notification daemon
 Monitor hotplugging in Wayland
 ** [[https://github.com/Alexays/Waybar][waybar]]
 Wayland notification bar
+** [[https://gitlab.com/chinstrap/gammastep][gammastep]]
+A wlroots based color-temperature adjuster
 * Installation
 1. Clone this repository
    #+BEGIN_SRC sh :results verbatim :exports both
