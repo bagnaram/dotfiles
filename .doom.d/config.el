@@ -61,12 +61,22 @@
 (defun light-theme ()
   (interactive)
   (message "Caught signal %S" last-input-event)
-  (load-theme 'doom-solarized-light))
+  (load-theme 'doom-solarized-light t))
 
 (defun dark-theme ()
   (interactive)
   (message "Caught signal %S" last-input-event)
-  (load-theme 'doom-dracula))
+  (load-theme 'doom-dracula t))
+
+(with-temp-buffer
+    (insert-file-contents "~/DAY")
+    (defvar daytime (buffer-string)))
+(setq daytime (replace-regexp-in-string "\n" "" daytime))
+
+(when (string= daytime "1")
+  (light-theme))
+(when (string= daytime "0")
+  (dark-theme))
 
 
 ;; custom keybindings

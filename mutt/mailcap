@@ -12,3 +12,4 @@ application/vnd.oasis.opendocument.spreadsheet; libreoffice %s &>/dev/null
 application/msword; abiword %s &>/dev/null
 application/vnd.openxml; abiword %s &>/dev/null
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; abiword %s &>/dev/null
+text/calendar; vcal %s; copiousoutput

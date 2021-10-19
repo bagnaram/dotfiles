@@ -1,6 +1,4 @@
 #set -ex
-# export ZSH="/home/mbagnara/.oh-my-zsh"
-#source $ZSH/oh-my-zsh.sh
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export HISTSIZE=55500
@@ -22,6 +20,7 @@ setalias() {
   alias kubectl='_kcl'
   alias grep='grep --color=auto'
   alias ls='ls --color=auto'
+  alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
 }
 setalias
 
@@ -144,21 +143,6 @@ function day_night_cycle() {
 # toggle the zsh syntax highlightinng theme
 TRAPUSR1() {
   day_night_cycle
-#  if [[ `zinit list | sed 's/\x1b\[[0-9;]*m//g' | grep 'dracula/zsh-syntax-highlighting'` ]]; then
-#    zinit unload zsh-users/zsh-syntax-highlighting > /dev/null
-#    zinit unload dracula/zsh-syntax-highlighting > /dev/null
-#    zinit unload zsh-users/zsh-autosuggestions > /dev/null
-#  else
-#    zinit lucid for \
-#    atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-#        zsh-users/zsh-syntax-highlighting \
-#    atload"ZSH_HIGHLIGHT_STYLES[cursor]='fg=#9580ff'" \
-#        dracula/zsh-syntax-highlighting \
-#    blockf \
-#        zsh-users/zsh-completions \
-#    atload"!_zsh_autosuggest_start" \
-#        zsh-users/zsh-autosuggestions
-#  fi
   setalias
 }
 

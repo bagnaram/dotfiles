@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-set -euo pipefail
+set -uo pipefail
 scheme=$(<~/DAY)
 
 set_rofi_theme()
@@ -61,7 +61,7 @@ case "$1" in
     "period-changed")
         # Test some echos
         notify-send "gammastep period change at $(date "+%H:%M")" "$(echo "$@")"
-        if [ "$3" = "night" ]; then
+        if [ "$2" = "daytime" ] && [ "$3" = "transition" ]; then
             scheme="1"
             set_nighttime
         elif [ "$3" = "daytime" ]; then
@@ -71,7 +71,7 @@ case "$1" in
             scheme="0"
             set_daytime
         fi
-	;;
+    ;;
     "set")
         if [[ "$scheme" = "0" ]]; then
         sky=""
