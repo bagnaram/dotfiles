@@ -64,6 +64,9 @@ case "$1" in
         if [ "$2" = "daytime" ] && [ "$3" = "transition" ]; then
             scheme="1"
             set_nighttime
+        elif [ "$2" = "daytime" ] && [ "$3" = "night" ]; then
+            scheme="1"
+            set_nighttime
         elif [ "$3" = "daytime" ]; then
             scheme="0"
             set_daytime

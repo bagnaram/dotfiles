@@ -56,11 +56,13 @@ zinit snippet OMZP::colored-man-pages
 zinit ice wait
 zinit light "b4b4r07/emoji-cli"
 zinit ice wait
+zinit ice as"program" cp"theme.sh -> theme" pick"theme"
+zinit light lemnos/theme.sh
 source $HOME/.aoeu/aoeu.sh
 
 # Obtain color scheme being set
 #
-scheme=`yq eval '.colors | alias' ${HOME}/dotfiles/alacritty/dracula-pro.yml`
+#scheme=`yq eval '.colors | alias' ${HOME}/dotfiles/alacritty/dracula-pro.yml`
 
 zinit wait lucid for \
 atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
