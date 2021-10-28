@@ -12,6 +12,8 @@
 (package! dockerfile-mode)
 (package! jinja2-mode :recipe
   (:host github :repo "bagnaram/jinja2-mode"))
+(package! git-link :recipe
+  (:host github :repo "sshaw/git-link"))
 (package! pinentry)
 (package! slack :recipe
   (:host github :repo "aculich/emacs-slack" :branch "cookie"))

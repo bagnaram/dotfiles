@@ -17,10 +17,11 @@ set_rofi_theme()
 set_daytime()
 {
     notify-send "Switching to daytime"
-    gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
-    gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
+    gsettings set org.gnome.desktop.interface gtk-theme 'OneStepBack'
+    gsettings set org.gnome.desktop.interface icon-theme 'Memphis98'
 
     crudini --set --existing ~/.config/qt5ct/qt5ct.conf Appearance style Adwaita
+    crudini --set --existing ~/.config/qt5ct/qt5ct.conf Appearance icon_theme Memphis98
     if pgrep "emacs" >/dev/null 2>&1 ; then
       emacsclient --eval '(light-theme)' --suppress-output &
     fi
@@ -35,9 +36,10 @@ set_daytime()
 set_nighttime(){
     notify-send "Switching to nighttime"
     gsettings set org.gnome.desktop.interface gtk-theme 'Dracula'
-    gsettings set org.gnome.desktop.interface icon-theme 'Adwaita-dark'
+    gsettings set org.gnome.desktop.interface icon-theme 'Memphis98'
 
     crudini --set --existing ~/.config/qt5ct/qt5ct.conf Appearance style Adwaita-Dark
+    crudini --set --existing ~/.config/qt5ct/qt5ct.conf Appearance icon_theme WhiteSur-dark
 
     if pgrep "emacs" >/dev/null 2>&1 ; then
       emacsclient --eval '(dark-theme)' --suppress-output &

@@ -1,6 +1,6 @@
-# i3 config file (v4)
+# Sway config file
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Please see sway(5) for documentation
 
 set $mod Mod4
 
@@ -21,12 +21,7 @@ input 1133:4136:Logitech_M570 {
   pointer_accel 0.7
 }
 
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+# Global popup menu
 set $menu 'wofi -I -i --show drun,run'
 set $menu 'rofi -combi-modi drun,run -show-icons -show combi'
 
@@ -44,7 +39,6 @@ bindsym $mod+Shift+q kill
 hide_edge_borders smart
 for_window [class="^.*"] border pixel 2
 
-#for_window [class="Code"] floating enable
 for_window [class="urxvt"] border pixel 2
 for_window [class="Steam"] floating enable
 for_window [class="Virt-viewer"] floating enable
@@ -247,5 +241,7 @@ exec_always {
     exec gammastep-indicator &
     pxill kanshi; exec kanshi
 }
+
+# Mouse cursor themes
 seat seat0 xcursor_theme macOSBigSur 48
 
