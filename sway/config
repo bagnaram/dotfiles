@@ -18,7 +18,7 @@ input  1:1:AT_Translated_Set_2_keyboard {
 
 input 1133:4136:Logitech_M570 {
   scroll_factor 2
-  pointer_accel 0.7
+  pointer_accel 0.1
 }
 
 # Global popup menu
@@ -239,9 +239,10 @@ exec_always {
 
     pkill -f "python3 /usr/bin/gammastep-indicator"
     exec gammastep-indicator &
-    pxill kanshi; exec kanshi
+    pkill kanshi; exec kanshi
 }
 
 # Mouse cursor themes
 seat seat0 xcursor_theme macOSBigSur 48
+#seat seat0 xcursor_theme retrosmart-xcursor-black-color-shadow 42
 

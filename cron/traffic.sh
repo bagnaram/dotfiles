@@ -9,5 +9,5 @@ value=$(echo $acpiV | cut -d " " -f 4 | sed -e 's/%//' | sed -e 's/,//')
 con=$(echo $acpiV | cut -d " " -f 3 | sed -e 's/,//')
 
 if [[ $value -lt 11 && "$con" == "Discharging" ]]; then
-    ~bagnaramatt/hotkey-ctl/notify-send.sh/notify-send.sh -u "critical" "Low Battery" "$value% remaining"
+    /home/$1/hotkey-ctl/notify-send.sh/notify-send.sh -u "critical" "Low Battery" "$value% remaining"
 fi    

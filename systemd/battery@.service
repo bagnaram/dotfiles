@@ -4,7 +4,7 @@ Description=Displays low battery
 [Service]
 Type=oneshot
 #User=%i
-ExecStart=/usr/bin/sh /home/%i/dotfiles/cron/traffic.sh
+ExecStart=/usr/bin/sh /home/%i/dotfiles/cron/traffic.sh  %i
 
 [Install]
 WantedBy=multi-user.target
