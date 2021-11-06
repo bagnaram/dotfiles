@@ -4,6 +4,7 @@ margin=4
 border-size=2
 border-color=#bd93f9
 default-timeout=5000
+layer=overlay
 icon-path=/usr/share/icons/Adwaita
 
 # Only for desktop, ignored when no such output exists

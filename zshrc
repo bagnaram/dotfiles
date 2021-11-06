@@ -1,4 +1,4 @@
-#set -ex
+#! /usr/bin/env zsh
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export HISTSIZE=55500
@@ -13,9 +13,10 @@ setopt hist_reduce_blanks # Remove superfluous blanks before recording entry.
 setopt hist_save_no_dups # Don't write duplicate entries in the history file.
 setopt share_history # share history between multiple shells
 setopt HIST_IGNORE_SPACE # Don't record an entry starting with a space.
+setopt complete_aliases # tab complete on aliases
 
 # Aliases
-setalias() {
+function setalias() {
   alias mutt="TERM=screen-256color neomutt"
   alias kubectl='_kcl'
   alias grep='grep --color=auto'
@@ -30,56 +31,47 @@ stty -ixon
 # convert the CR character to LF on input
 stty icrnl
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
+source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/oh-my-zsh.sh
+fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh )
+source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/git/git.plugin.zsh
+fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/git )
+source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/colored-man-pages )
+source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting )
+source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-completions/zsh-completions.plugin.zsh
+fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-completions )
+source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions )
+source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-dracula-SLASH-zsh/dracula.zsh-theme
+fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-dracula-SLASH-zsh )
+source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-b4b4r07-SLASH-emoji-cli/emoji-cli.zsh
 
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+#source <(antibody init)
+#
+#antibody bundle << EOF
+#
+## empty lines are skipped
+#
+#ohmyzsh/ohmyzsh
+#ohmyzsh/ohmyzsh path:plugins/git
+#ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+#
+#zsh-users/zsh-syntax-highlighting
+#zsh-users/zsh-completions
+#zsh-users/zsh-autosuggestions
+#
+#dracula/zsh
+#
+#b4b4r07/emoji-cli path:emoji-cli.zsh
+#
+#EOF
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-patch-dl
-
-### End of Zinit's installer chunk
-
-zinit ice wait
-zinit snippet OMZP::git
-zinit snippet OMZP::colored-man-pages
-zinit ice wait
-zinit light "b4b4r07/emoji-cli"
-zinit ice wait
-zinit ice as"program" cp"theme.sh -> theme" pick"theme"
-zinit light lemnos/theme.sh
-source $HOME/.aoeu/aoeu.sh
+LS_COLORS="$(vivid generate solarized-light)"
 
 # Obtain color scheme being set
 #
 #scheme=`yq eval '.colors | alias' ${HOME}/dotfiles/alacritty/dracula-pro.yml`
-
-zinit wait lucid for \
-atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zsh-users/zsh-syntax-highlighting \
-blockf \
-    zsh-users/zsh-completions \
-atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions
-
-
-
-zinit ice atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
-zinit light trapd00r/LS_COLORS
-
-# Load dracula theme
-zinit ice pick"async.zsh" src"dracula.zsh-theme" # with zsh-async library that's bundled with it.
-zinit light dracula/zsh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -101,6 +93,7 @@ bindkey "^?" backward-delete-char
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey "$EMOJI_CLI_KEYBIND" emoji::cli
 
 export KEYTIMEOUT=1
 export GOPATH=$HOME/go
@@ -115,7 +108,7 @@ export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 # Kubectl project plugin
 function _kcl() {
   if [[ -z "$1" && -z "$2" ]]; then
-    \kubectl -n $KUBESPACE "$@"
+    \kubecolor -n $KUBESPACE "$@"
     return 0
   fi
   if [[ ! -z "$1" && "$1" == "project" && -z "$2" ]]; then
@@ -128,17 +121,42 @@ function _kcl() {
     echo "Set current project to $KUBESPACE"
     return 0
   else
-    \kubectl -n $KUBESPACE "$@"
+    \kubecolor -n $KUBESPACE "$@"
     return 0
   fi
 }
 
+# Emit OSC7 (current working directory)
+function _urlencode() {
+  local length="${#1}"
+  for (( i = 0; i < length; i++ )); do
+    local c="${1:$i:1}"
+    case $c in
+      %) printf '%%%02X' "'$c" ;;
+      *) printf "%s" "$c" ;;
+    esac
+  done
+}
+
+
+function osc7_cwd() {
+  printf '\e]7;file://%s%s\e\\' "$HOSTNAME" "$(_urlencode "$PWD")"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook -Uz chpwd osc7_cwd
+
+source <(kubectl completion zsh)
+compdef kubecolor=kubectl
+
 function day_night_cycle() {
   scheme=$(<~/DAY)
   if [ "$scheme" = "0" ];then
-    theme.sh dracula
+    theme.sh "Dracula Pro (Van Helsing)"
+    export LS_COLORS="$(vivid generate solarized-dark)"
   elif [ "$scheme" = "1" ]; then
-    theme.sh belafonte-day
+    theme.sh earl-grey-theme
+    export LS_COLORS="$(vivid generate solarized-light)"
   fi
 }
 
@@ -158,4 +176,3 @@ export DISABLE_AUTO_UPDATE=true
 
 # load in history last
 fc -R $HISTFILE
-

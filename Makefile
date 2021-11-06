@@ -70,6 +70,9 @@ alacritty:
 	mkdir -p ${HOME}/.config/alacritty/
 	touch ${HOME}/.config/alacritty/alacritty.yml
 	yq w -i ${HOME}/.config/alacritty/alacritty.yml import[+] $(DOTFILES)/alacritty/dracula.yml
+.PHONY: foot
+foot:
+	if [ ! -d "${HOME}/.config/foot" ]; then ln -fs $(DOTFILES)/foot ${HOME}/.config/foot; fi
 .PHONY: crontab
 crontab:
 	sed -i "s#DOTFILES#${DOTFILES}#g" ${DOTFILES}/cron/crontab

@@ -220,7 +220,10 @@ exec swayidle -w \
               resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000' \
          lock 'swaylock -f -c 000000' \
-         unlock 'kill -KILL $(pgrep swaylock)' \
+         unlock 'kill -KILL $(pgrep swaylock)'
+
+# Clipboard management
+exec wl-paste -t text --watch clipman store
 
 
 exec_always {
@@ -231,16 +234,13 @@ exec_always {
 
     #gsettings set $gnome-schema font-name 'Your font name'
 
-    # Clipboard management
-    exec wl-paste -t text --watch clipman store
-
     # Needed for pinentry
     dbus-update-activation-environment --all
-
-    pkill -f "python3 /usr/bin/gammastep-indicator"
-    exec gammastep-indicator &
-    pkill kanshi; exec kanshi
 }
+
+exec_always pkill -f "python3 /usr/bin/gammastep-indicator"
+exec_always gammastep-indicator &
+exec_always pkill kanshi; exec kanshi
 
 # Mouse cursor themes
 seat seat0 xcursor_theme macOSBigSur 48

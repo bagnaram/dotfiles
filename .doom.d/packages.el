@@ -15,8 +15,6 @@
 (package! git-link :recipe
   (:host github :repo "sshaw/git-link"))
 (package! pinentry)
-(package! slack :recipe
-  (:host github :repo "aculich/emacs-slack" :branch "cookie"))
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

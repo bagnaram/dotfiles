@@ -10,7 +10,7 @@ set_rofi_theme()
         mkdir -p "${CDIR}"
     fi
     get_link=$(readlink -f "${CDIR}/config.rasi")
-    sed -i 's/^\s*\(@theme\s\+".*"\)/\/\/\1/' "${get_link}"
+    sed -i '/^\s*\(@theme\s\+".*"\)/d' "${get_link}" 1> /dev/null 2>&1
     echo "@theme \"${1}\"" >> "${get_link}"
 }
 
@@ -20,8 +20,8 @@ set_daytime()
     gsettings set org.gnome.desktop.interface gtk-theme 'OneStepBack'
     gsettings set org.gnome.desktop.interface icon-theme 'Memphis98'
 
-    crudini --set --existing ~/.config/qt5ct/qt5ct.conf Appearance style Adwaita
-    crudini --set --existing ~/.config/qt5ct/qt5ct.conf Appearance icon_theme Memphis98
+    crudini --inplace --set --existing ~/.config/qt5ct/qt5ct.conf Appearance style Adwaita
+    crudini --inplace --set --existing ~/.config/qt5ct/qt5ct.conf Appearance icon_theme Memphis98
     if pgrep "emacs" >/dev/null 2>&1 ; then
       emacsclient --eval '(light-theme)' --suppress-output &
     fi
@@ -64,6 +64,9 @@ case "$1" in
         # Test some echos
         notify-send "gammastep period change at $(date "+%H:%M")" "$(echo "$@")"
         if [ "$2" = "daytime" ] && [ "$3" = "transition" ]; then
+            scheme="1"
+            set_nighttime
+        elif [ "$2" = "none" ] && [ "$3" = "transition" ]; then
             scheme="1"
             set_nighttime
         elif [ "$2" = "daytime" ] && [ "$3" = "night" ]; then
