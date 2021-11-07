@@ -6,8 +6,6 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "Matt Bagnara"
-      user-mail-address "bagnaramatt@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -59,7 +57,7 @@
 (defun light-theme ()
   (interactive)
   (message "Caught signal %S" last-input-event)
-  (setq doom-earl-grey-brighter-comments t)
+  (setq doom-earl-grey-brighter-comments nil)
   (load-theme 'doom-earl-grey t))
 
 (defun dark-theme ()
@@ -108,6 +106,7 @@
       :desc "Window left" "w K" nil)
 
 ;; mutt email composition
+(add-to-list 'auto-mode-alist '("/neomutt" . message-mode))
 (add-to-list 'auto-mode-alist '("/mutt" . message-mode))
 
 ;; disble spell checking in yaml-lsp mode
