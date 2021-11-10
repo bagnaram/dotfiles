@@ -27,6 +27,12 @@ set_daytime()
     fi
     #kitty @ --to unix:/tmp/mykitty set-colors --all --configured ~/.config/kitty/Belafonte_Day.conf &
     #yq eval -i '.colors alias = "light"' ${HOME}/dotfiles/alacritty/dracula-pro.yml &
+    # set sway theme
+    swaymsg "client.focused_inactive #414D58 #414D58 #F8F8F2 #414D58 #414D58;
+             client.focused          #556995 #556995 #FCFBF9 #556995 #556995;
+             client.unfocused        #F7F3EE #F7F3EE #605A52 #292d2e #F7F3EE;
+             client.urgent           #708CA9 #FF5555 #F8F8F2 #FF5555 #FF5555;
+             client.placeholder      #8F5652 #8F5652 #F8F8F2 #0B0D0F #0B0D0F"
     set_rofi_theme /usr/share/rofi/themes/paper-float.rasi
     echo 1 > ~/DAY
     pkill -RTMIN+1 waybar
@@ -46,6 +52,13 @@ set_nighttime(){
     fi
     #kitty @ --to unix:/tmp/mykitty set-colors --all --configured ~/.config/kitty/dracula.conf &
     #yq eval -i '.colors alias = "dark"' ${HOME}/dotfiles/alacritty/dracula-pro.yml &
+    # set sway theme
+    swaymsg "client.focused_inactive #414D58 #414D58 #F8F8F2 #414D58 #414D58;
+             client.focused          #708CA9 #708CA9 #F8F8F2 #708CA9 #708CA9;
+             client.unfocused        #0B0D0F #0B0D0F #BFBFBF #0B0D0F #0B0D0F;
+             client.urgent           #708CA9 #FF5555 #F8F8F2 #FF5555 #FF5555;
+             client.placeholder      #0B0D0F #0B0D0F #F8F8F2 #0B0D0F #0B0D0F"
+
     set_rofi_theme /usr/share/rofi/themes/purple.rasi
     echo 0 > ~/DAY
     pkill -RTMIN+1 waybar

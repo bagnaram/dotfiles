@@ -4,13 +4,6 @@
 
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-
-font pango:Monospace 8
-
 input  1:1:AT_Translated_Set_2_keyboard {
   xkb_layout "us"
   xkb_variant "dvorak"
@@ -22,7 +15,7 @@ input 1133:4136:Logitech_M570 {
 }
 
 # Global popup menu
-set $menu 'wofi -I -i --show drun,run'
+#set $menu 'wofi -I -i --show drun,run'
 set $menu 'rofi -combi-modi drun,run -show-icons -show combi'
 
 output * bg ~/Sway_Wallpaper_CaveCanem_1920x1080.png fill
@@ -150,11 +143,7 @@ bindsym $mod+d exec $menu
 
 # Screenshots
 # Screenshot fullscreen
-bindsym Print exec "scrot -q 100 '/home/mbagnara/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 's3cmd put -P $f s3://s3.j3ss.co/screenshots/ && echo https://s3.j3ss.co/screenshots/$n | xclip -i -selection clipboard'"
-# Screenshot with selection
-bindsym $mod+Print exec "sleep 0.2; scrot -q 100 -s '/home/mbagnara/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 's3cmd put -P $f s3://s3.j3ss.co/screenshots/ && echo https://s3.j3ss.co/screenshots/$n | xclip -i -selection clipboard'"
-# Screenshot current focused window
-bindsym Shift+Print exec "scrot -q 100 -u '/home/mbagnara/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 's3cmd put -P $f s3://s3.j3ss.co/screenshots/ && echo https://s3.j3ss.co/screenshots/$n | xclip -i -selection clipboard'"
+bindsym Print exec scrot
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -213,6 +202,10 @@ bar {
 }
 
 set $gnome-schema org.gnome.desktop.interface
+
+# inhibit idle for all fullscreen programs
+for_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="^.*"] inhibit_idle fullscreen
 
 exec swayidle -w \
          timeout 60 'swaylock -f -c 000000' \

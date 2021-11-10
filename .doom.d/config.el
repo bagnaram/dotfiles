@@ -17,9 +17,9 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
- (setq doom-font (font-spec :family "Iosevka Medium" :size 13)
+ (setq doom-font (font-spec :name "monospace:size=14")
        doom-big-font (font-spec :family "Iosevka" :size 36)
-       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+       doom-variable-pitch-font (font-spec :family "sans" :size 14))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -131,3 +131,5 @@
 (auth-source-pass-enable)
 (setq auth-sources '(password-store))
 (defconst EMACS27+ (not (version< emacs-version "27")))
+
+(setq doom-modeline-major-mode-icon t)

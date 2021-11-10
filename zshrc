@@ -112,13 +112,16 @@ function _kcl() {
     return 0
   fi
   if [[ ! -z "$1" && "$1" == "project" && -z "$2" ]]; then
-      echo "Current project: $KUBESPACE"
-      echo "Usage: $0 project <namespace>"
+      printf 'Current project: \033[31m%s\n' $KUBESPACE
+      printf '\033[0m'
+      printf 'Usage: %s project \033[34m<namespace>\n' $0
+
       return 1
   fi
   if [[ ! -z "$1"  && "$1" == "project" && ! -z $2 ]]; then
     export KUBESPACE="$2"
-    echo "Set current project to $KUBESPACE"
+    printf 'Set current project: \033[31m%s\n' $KUBESPACE
+    printf '\033[0m'
     return 0
   else
     \kubecolor -n $KUBESPACE "$@"

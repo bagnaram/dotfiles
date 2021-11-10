@@ -9,6 +9,7 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 (package! go-mode)
+(package! rainbow-mode)
 (package! dockerfile-mode)
 (package! jinja2-mode :recipe
   (:host github :repo "bagnaram/jinja2-mode"))
