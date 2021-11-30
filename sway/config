@@ -4,11 +4,13 @@
 
 set $mod Mod4
 
+# Dell XPS keyboard
 input  1:1:AT_Translated_Set_2_keyboard {
   xkb_layout "us"
   xkb_variant "dvorak"
 }
 
+# Trackball mouse
 input 1133:4136:Logitech_M570 {
   scroll_factor 2
   pointer_accel 0.1
@@ -18,6 +20,7 @@ input 1133:4136:Logitech_M570 {
 #set $menu 'wofi -I -i --show drun,run'
 set $menu 'rofi -combi-modi drun,run -show-icons -show combi'
 
+# Set wallpaper
 output * bg ~/Sway_Wallpaper_CaveCanem_1920x1080.png fill
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -191,12 +194,7 @@ bindsym $mod+r mode "resize"
 mouse_warping container
 focus_follows_mouse always
 
-# pick color scheme for i3
-
-# auto run commands
-# set background
-# use the same background as slim (login manager)
-# this file is an alias to something in /home/jessie/Pictures
+# Waybar
 bar {
     swaybar_command waybar
 }
@@ -208,34 +206,29 @@ for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle fullscreen
 
 exec swayidle -w \
-         timeout 60 'swaylock -f -c 000000' \
-         timeout 90 'swaymsg "output * dpms off"' \
+         timeout 80 'swaylock -f -c 000000' \
+         timeout 110 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000' \
          lock 'swaylock -f -c 000000' \
          unlock 'kill -KILL $(pgrep swaylock)'
 
 # Clipboard management
-exec wl-paste -t text --watch clipman store
+exec wl-paste -p -t text --watch clipman store
 
+exec gammastep-indicator &
 
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Dracula'
     gsettings set $gnome-schema icon-theme 'Breeze'
     gsettings set $gnome-schema cursor-theme 'macOSBigSur'
 
-
-    #gsettings set $gnome-schema font-name 'Your font name'
-
     # Needed for pinentry
     dbus-update-activation-environment --all
-}
 
-exec_always pkill -f "python3 /usr/bin/gammastep-indicator"
-exec_always gammastep-indicator &
-exec_always pkill kanshi; exec kanshi
+    # https://github.com/emersion/kanshi/issues/43
+    pkill kanshi; exec kanshi
+}
 
 # Mouse cursor themes
 seat seat0 xcursor_theme macOSBigSur 48
-#seat seat0 xcursor_theme retrosmart-xcursor-black-color-shadow 42
-

@@ -1,9 +1,4 @@
-#!/bin/sh
-
-# path:       /home/klassiker/.local/share/repos/dmenu/scripts/dmenu_iwd.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/dmenu
-# date:       2020-06-08T09:11:53+0200
+#!/usr/bin/env zsh
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to connect to wlan with iwd
@@ -19,6 +14,16 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     exit 0
 fi
 
+function wofi() {
+    command wofi -d -I "$@"
+}
+function rofi() {
+    command rofi -m -1 -l 3 -theme solarized -dmenu -i "$@"
+}
+function ssid-scan(){
+    ~/dotfiles/waybar/iwd-scan.py "$@"
+}
+
 case $script in
     dmenu_*)
         label_interface="interface »"
@@ -30,13 +35,13 @@ case $script in
         ;;
     rofi_*)
         label_interface=""
-        menu_interface="rofi -m -1 -l 3 -theme solarized -dmenu -i"
+        #menu_interface="rofi -m -1 -l 3 -theme solarized -dmenu -i"
         menu_interface="wofi -d -I"
         label_ssid=""
-        menu_ssid="rofi -m -1 -l 10 -theme solarized -dmenu -i"
+        #menu_ssid="rofi -m -1 -l 10 -theme solarized -dmenu -i"
         menu_ssid="wofi -d -I"
         label_psk=""
-        menu_psk="rofi -m -1 -l 1 -theme solarized -dmenu -i"
+        #menu_psk="rofi -m -1 -l 1 -theme solarized -dmenu -i"
         menu_psk="wofi -d -I"
         ;;
     *)
@@ -53,8 +58,8 @@ remove_escape_sequences() {
 get_interface() {
     interface=$(iwctl device list \
         | remove_escape_sequences \
-        | awk '{print $1" == ["$2"] == ["$3"]"}' \
-        | $menu_interface -p "$label_interface" \
+        | awk '{printf("%-12s %-9s %s\n", $1, $2, $3)}' \
+        | wofi -p "$label_interface" \
         | awk '{print $1}'
     )
     [ -n "$interface" ] \
@@ -62,49 +67,71 @@ get_interface() {
 }
 
 scan_ssid() {
-    iwctl station "$interface" scan && sleep 1
-    scan_result=$(iwctl station "$interface" get-networks \
-        | remove_escape_sequences \
-        | sed 's/ psk / ; [psk ] ; /;s/ open / ; [open] ; /;s/\s\+/ /g' \
-        | awk -F " ; " '{print $2" =="$1}' \
-    )
+    #iwctl station "$interface" scan
+
+    #scan_result=$(iwctl station wlan0 get-networks | remove_escape_sequences | awk '/\*/{ printf("%-40ls%-8ls%ls\n", substr($0,5,32), substr($0, 37, 4), substr($0,41,44)) }')
+    scan_result=$(ssid-scan | gawk 'NR%3{printf("%-32ls",$0) ;next;}1')
+
+#    scan_result=$(iwctl station "$interface" get-networks \
+#        | remove_escape_sequences \
+#        | sed 's/ psk / ; psk ; /;s/ open / ; [open] ; /;s/\s\+/ /g; s/> />/g' \
+#        | awk '/\*/{ printf( substr($0,5,32) }'
+#        | awk -F " ; " '{printf("%-70ls%-8ls%ls\n", $1, $2, $3)}' \
+#    )
 }
 
 get_ssid() {
-    select=$(printf "[scan] == rescan?\n%s" "$scan_result" \
-        | $menu_ssid -p "$label_ssid" \
+
+    #notify-send.sh $scan_result
+    select=$(printf "🔁[RESCAN]\n%s" "$scan_result" \
+        | wofi -p "$label_ssid" \
     )
-    ssid=$(printf "%s" "$select" \
-        | awk -F" == " '{print $2}' \
-    )
-    if printf "%s" "$ssid" | grep -q "^> "; then
-        notify-send "iNet wireless daemon" "already connected to \"$(printf "%s" "$ssid" \
-            | sed 's/> //')\""
+
+
+
+    if [[ "$select" =~ '^>' ]]
+    then
+        notify-send.sh "iNet wireless daemon" "Already connected to this network."
         exit 0
-    fi
-    [ "$(printf "%s" "$select" \
-        | awk -F" == " '{print $1}')" = "[open]" ] \
-        && open=1
-    [ "$select" = "[scan] == rescan?" ] && {
-        scan_ssid && sleep 2
+    elif [[ "$select" =~ 'open *$' ]]
+    then
+        open=1
+    elif [[ "$select" = "🔁[RESCAN]" ]]
+    then
+        scan_ssid
         get_ssid
-    }
-    [ -n "$select" ] \
-        || exit 1
+        return
+    elif ! [[ -v select ]] || [[ "$select" = "" ]]
+    then
+        exit 1
+    fi
+
+    # Get just list of SSIDsin raw
+    ssids=$(ssid-scan ssid)
+
+    # iterate through raw SSID list to determine which one to connect to
+    while IFS= read -r ssid_list
+    do
+        if [[ $select =~ $ssid_list ]] then
+            ssid=$ssid_list
+            return
+        fi
+    done <<< "$ssids"
 }
 
 get_psk() {
     psk=$(printf 'press esc or enter if you had already insert a passphrase before!\n' \
-        | $menu_psk -p "$label_psk" \
+        | wofi -p "$label_psk" \
     )
 }
 
 connect_iwd() {
-    if [ -z "$open" ]; then
+    if [[ "$open" = 1 ]]
+    then
+        iwctl station "$interface" connect ''$ssid''
+    else
         get_psk
         iwctl station "$interface" connect "$ssid" -P "$psk"
-    else
-        iwctl station "$interface" connect "$ssid"
     fi
     notify-send "iNet wireless daemon" "connected to \"$ssid\""
 }

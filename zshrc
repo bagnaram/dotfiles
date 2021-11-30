@@ -103,18 +103,23 @@ export KUBESPACE=default
 export EMOJI_CLI_USE_EMOJI=true
 export HISTFILE=~/.zsh_history
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+export CHECKPOINT_DISABLE=ANY_VALUE
+export DISABLE_AUTO_UPDATE=true
 
+# zsh-syntax-highlighting paste performance improvement
+# https://github.com/zsh-users/zsh-autosuggestions/issues/238#issuecomment-389324292
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # Kubectl project plugin
 function _kcl() {
   if [[ -z "$1" && -z "$2" ]]; then
-    \kubecolor -n $KUBESPACE "$@"
+    command kubecolor -n $KUBESPACE "$@"
     return 0
   fi
   if [[ ! -z "$1" && "$1" == "project" && -z "$2" ]]; then
       printf 'Current project: \033[31m%s\n' $KUBESPACE
       printf '\033[0m'
-      printf 'Usage: %s project \033[34m<namespace>\n' $0
+      printf 'Usage: kubectl project \033[34m<namespace>\n'
 
       return 1
   fi
@@ -124,7 +129,7 @@ function _kcl() {
     printf '\033[0m'
     return 0
   else
-    \kubecolor -n $KUBESPACE "$@"
+    command kubecolor -n $KUBESPACE "$@"
     return 0
   fi
 }
@@ -174,8 +179,6 @@ day_night_cycle
 # Load environment vars into systemd
 export $(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
 
-export CHECKPOINT_DISABLE=ANY_VALUE
-export DISABLE_AUTO_UPDATE=true
 
 # load in history last
 fc -R $HISTFILE

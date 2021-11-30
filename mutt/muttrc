@@ -36,7 +36,8 @@ set mailcap_path =~/.mutt/mailcap
 set print_command="$HOME/.mutt/mutt_print.sh"
 
 
-source ~/dotfiles/mutt/dracula/dracula.muttrc
+
+source ~/dotfiles/mutt/themes/mutt-colors-solarized-light-256.muttrc
 source ~/dotfiles/mutt/account.fastmail
 
 message-hook .                           'unalternative_order *; alternative_order text/plain text/html'

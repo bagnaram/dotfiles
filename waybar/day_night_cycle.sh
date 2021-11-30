@@ -10,8 +10,14 @@ set_rofi_theme()
         mkdir -p "${CDIR}"
     fi
     get_link=$(readlink -f "${CDIR}/config.rasi")
-    sed -i '/^\s*\(@theme\s\+".*"\)/d' "${get_link}" 1> /dev/null 2>&1
-    echo "@theme \"${1}\"" >> "${get_link}"
+    sed -i 's#@theme ".*"#@theme "'"$1"'"#g' "${get_link}"
+}
+
+set_mutt_theme()
+{
+    CDIR="${HOME}/.mutt"
+    get_link=$(readlink -f "${CDIR}/muttrc")
+    sed -i "s#source ~/dotfiles/mutt/themes/.*#source ~/dotfiles/mutt/themes/$1#g" "${get_link}"
 }
 
 set_daytime()
@@ -34,6 +40,7 @@ set_daytime()
              client.urgent           #708CA9 #FF5555 #F8F8F2 #FF5555 #FF5555;
              client.placeholder      #8F5652 #8F5652 #F8F8F2 #0B0D0F #0B0D0F"
     set_rofi_theme /usr/share/rofi/themes/paper-float.rasi
+    set_mutt_theme mutt-colors-solarized-light-256.muttrc
     echo 1 > ~/DAY
     pkill -RTMIN+1 waybar
     pkill -USR1 zsh
@@ -60,6 +67,7 @@ set_nighttime(){
              client.placeholder      #0B0D0F #0B0D0F #F8F8F2 #0B0D0F #0B0D0F"
 
     set_rofi_theme /usr/share/rofi/themes/purple.rasi
+    set_mutt_theme dracula.muttrc
     echo 0 > ~/DAY
     pkill -RTMIN+1 waybar
     pkill -USR1 zsh
