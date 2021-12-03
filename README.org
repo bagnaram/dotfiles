@@ -8,7 +8,7 @@ single repo, and can install the configuration using various make targets.
 * Requirements
 I am using the following configuration:
 ** [[https://codeberg.org/dnkl/foot/][foot]]
-A minimalistic terminal emulator using damage tracking
+A minimalist terminal emulator using damage tracking
 ** Pipewire
 wlroots support for WebRTC
 ** emacs
@@ -52,4 +52,23 @@ A wlroots based color-temperature adjuster
    make vim
    #+END_SRC
 * To Customize:
-Simply modify the files within the dotfiles directory
+Simply modify the files within the ~dotfiles~ directory
+* GPG SSH subkeys
+I use the GPG subkeys to provide SSH access to my environment. This is ideal
+because the private keys exist on my Yubikey and not anywhere else. To configure OpenSSH, run:
+
+1. Setup GPG agent to enable SSH access
+   #+BEGIN_SRC sh :results verbatim :exports both
+   make gpg-agent
+   #+END_SRC
+
+2. Configure sshcontrol
+   #+BEGIN_SRC sh :results verbatim :exports both
+   echo 'scd learn --force' | gpg-connect-agent
+   #+END_SRC
+   Each line of output contains the keygrip for one of the three keys on your
+   OpenPGP card: The encryption key, the signing key, and the authentication key
+   (which is the one we want). The third line, for “OPENPGP.3”, contains the
+   keygrip for the authentication key.
+
+   Use the 3rd line and add it to the ~/.gnupg/sshcontrol~ file

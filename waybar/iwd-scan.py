@@ -1,4 +1,15 @@
 #!/usr/bin/python3
+#
+# Usage:
+#   iwd-scan.py [ssid]
+# DESCRIPTION:
+#   Outputs scanned SSIDs from of all wifi devices via dbus. Outputs in the following format:
+#     SSID/n
+#     Signal Strength dBm\n
+#     psk|wpa|open \n
+# OPTIONS:
+#   ssid
+#     print just the SSID data, followed by a newline character
 
 import sys
 import dbus
