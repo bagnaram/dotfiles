@@ -1,7 +1,7 @@
 DOTFILES := $(shell pwd)
 
 .PHONY: all
-all: mutt xterm vim i3 screen redshift dunst doom waybar rofi kanshi
+all: mutt xterm vim i3 screen redshift dunst doom waybar rofi kanshi fnott swaylock
 
 .PHONY: ohmyzsh
 ohmyzsh:
@@ -61,6 +61,15 @@ pavolume:
 .PHONY: mako
 mako:
 	ln -fs $(DOTFILES)/mako  ${HOME}/.config/mako
+.PHONY: fnott
+fnott:
+	ln -fs $(DOTFILES)/fnott  ${HOME}/.config/fnott
+.PHONY: fontconfig
+fontconfig:
+	ln -fs $(DOTFILES)/fontconfig  ${HOME}/.config/fontconfig
+.PHONY: swaylock
+swaylock:
+	ln -fs $(DOTFILES)/swaylock  ${HOME}/.config/swaylock
 .PHONY: rofi
 rofi:
 	mkdir -p ${HOME}/.config/rofi/
