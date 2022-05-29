@@ -23,11 +23,11 @@ set_mutt_theme()
 
 set_daytime()
 {
-    notify-send "Switching to daytime"
+    notify-send -a "day-night-cycle" "☀ Switching to daytime"
     gsettings set org.gnome.desktop.interface gtk-theme 'OneStepBack'
     gsettings set org.gnome.desktop.interface icon-theme 'Memphis98'
 
-    crudini --inplace --set --existing ~/.config/qt5ct/qt5ct.conf Appearance style Adwaita
+    crudini --inplace --set --existing ~/.config/qt5ct/qt5ct.conf Appearance style Windows
     crudini --inplace --set --existing ~/.config/qt5ct/qt5ct.conf Appearance icon_theme Memphis98
     if pgrep "emacs" >/dev/null 2>&1 ; then
       emacsclient --eval '(light-theme)' --suppress-output &
@@ -48,7 +48,7 @@ set_daytime()
 }
 
 set_nighttime(){
-    notify-send "Switching to nighttime"
+    notify-send -a "day-night-cycle" "🌙 Switching to nighttime"
     gsettings set org.gnome.desktop.interface gtk-theme 'Dracula'
     gsettings set org.gnome.desktop.interface icon-theme 'Memphis98'
 
@@ -84,7 +84,7 @@ fi
 case "$1" in
     "period-changed")
         # Test some echos
-        notify-send "gammastep period change at $(date "+%H:%M")" "$(echo "$@")"
+        notify-send -a "gammastep" "gammastep period change at $(date "+%H:%M")" "$(echo "$@")"
         if [ "$2" = "daytime" ] && [ "$3" = "transition" ]; then
             scheme="1"
             set_nighttime

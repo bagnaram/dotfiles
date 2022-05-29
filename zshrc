@@ -1,8 +1,8 @@
 #! /usr/bin/env zsh
+#zmodload zsh/zprof
+
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export HISTSIZE=55500
-export SAVEHIST=10000
 setopt append_history # Don't overwrite, append!
 setopt INC_APPEND_HISTORY # Write after each command
 setopt hist_expire_dups_first # Expire duplicate entries first when trimming history.
@@ -20,8 +20,12 @@ function setalias() {
   alias mutt="TERM=screen-256color neomutt"
   alias kubectl='_kcl'
   alias grep='grep --color=auto'
-  alias ls='ls --color=auto'
+  alias ls='exa --icons'
+  # for installing laTEX plugins
   alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
+  alias sudo=doas
+  alias strip='exiv2 -m ~/dotfiles/strip.exiv2'
+  alias less='less -R'
 }
 setalias
 
@@ -31,21 +35,37 @@ stty -ixon
 # convert the CR character to LF on input
 stty icrnl
 
-source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/oh-my-zsh.sh
-fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh )
-source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/git/git.plugin.zsh
-fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/git )
-source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
-fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/colored-man-pages )
-source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting )
-source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-completions/zsh-completions.plugin.zsh
-fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-completions )
-source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions )
-source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-dracula-SLASH-zsh/dracula.zsh-theme
-fpath+=( /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-dracula-SLASH-zsh )
-source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-b4b4r07-SLASH-emoji-cli/emoji-cli.zsh
+function completions()
+{
+  autoload -Uz compinit
+  setopt EXTENDEDGLOB
+  for dump in $HOME/.zcompdump(#qN.m1); do
+    compinit
+    if [[ -s "$dump" && (! -s "$dump.zwc" || "$dump" -nt "$dump.zwc") ]]; then
+      zcompile "$dump"
+    fi
+  done
+  unsetopt EXTENDEDGLOB
+  compinit -C
+  compdef kubecolor=kubectl
+}
+
+completions
+
+
+source ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/git/git.plugin.zsh
+fpath+=( ~~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/git )
+source ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+fpath+=( ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/plugins/colored-man-pages )
+source ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fpath+=( ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting )
+source ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-completions/zsh-completions.plugin.zsh
+fpath+=( ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-completions )
+source ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+fpath+=( ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions )
+source ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-dracula-SLASH-zsh/dracula.zsh-theme
+fpath+=( ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-dracula-SLASH-zsh )
+source ~/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-b4b4r07-SLASH-emoji-cli/emoji-cli.zsh
 
 #source <(antibody init)
 #
@@ -53,7 +73,6 @@ source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH
 #
 ## empty lines are skipped
 #
-#ohmyzsh/ohmyzsh
 #ohmyzsh/ohmyzsh path:plugins/git
 #ohmyzsh/ohmyzsh path:plugins/colored-man-pages
 #
@@ -67,11 +86,6 @@ source /home/mbagnara/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH
 #
 #EOF
 
-LS_COLORS="$(vivid generate solarized-light)"
-
-# Obtain color scheme being set
-#
-#scheme=`yq eval '.colors | alias' ${HOME}/dotfiles/alacritty/dracula-pro.yml`
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -95,6 +109,8 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 bindkey "$EMOJI_CLI_KEYBIND" emoji::cli
 
+export HISTSIZE=55500
+export SAVEHIST=10000
 export KEYTIMEOUT=1
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
@@ -103,8 +119,11 @@ export KUBESPACE=default
 export EMOJI_CLI_USE_EMOJI=true
 export HISTFILE=~/.zsh_history
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-export CHECKPOINT_DISABLE=ANY_VALUE
 export DISABLE_AUTO_UPDATE=true
+# opt-out scripts
+export DO_NOT_TRACK=1
+# terraform
+export CHECKPOINT_DISABLE=ANY_VALUE
 
 # zsh-syntax-highlighting paste performance improvement
 # https://github.com/zsh-users/zsh-autosuggestions/issues/238#issuecomment-389324292
@@ -112,6 +131,10 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # Kubectl project plugin
 function _kcl() {
+  # lazy-load kube completions
+  if [ $commands[kubectl] ]; then
+    source <(command kubectl completion zsh)
+  fi
   if [[ -z "$1" && -z "$2" ]]; then
     command kubecolor -n $KUBESPACE "$@"
     return 0
@@ -154,17 +177,19 @@ function osc7_cwd() {
 autoload -Uz add-zsh-hook
 add-zsh-hook -Uz chpwd osc7_cwd
 
-source <(kubectl completion zsh)
-compdef kubecolor=kubectl
 
 function day_night_cycle() {
   scheme=$(<~/DAY)
   if [ "$scheme" = "0" ];then
-    theme.sh "Dracula Pro (Van Helsing)"
-    export LS_COLORS="$(vivid generate solarized-dark)"
+#    theme.sh "Dracula Pro (Van Helsing)"
+    # does not fork a "cat" process
+    echo -n $(<~/.config/foot/osc4-dracula.txt)
+    export LS_COLORS=$(<~/.config/lscolors/solarized-dark)
   elif [ "$scheme" = "1" ]; then
-    theme.sh earl-grey-theme
-    export LS_COLORS="$(vivid generate solarized-light)"
+#    theme.sh earl-grey-theme
+    # does not fork a "cat" process
+    echo -n $(<~/.config/foot/osc4-earlgrey.txt)
+    export LS_COLORS=$(<~/.config/lscolors/solarized-light)
   fi
 }
 
@@ -179,6 +204,7 @@ day_night_cycle
 # Load environment vars into systemd
 export $(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
 
+#zprof
 
 # load in history last
 fc -R $HISTFILE

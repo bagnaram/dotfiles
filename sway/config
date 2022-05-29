@@ -18,7 +18,9 @@ input 1133:4136:Logitech_M570 {
 
 # Global popup menu
 #set $menu 'wofi -I -i --show drun,run'
-set $menu 'rofi -combi-modi drun,run -show-icons -show combi'
+#set $menu 'rofi -combi-modi drun,run -show-icons -show combi -drun-use-desktop-cache'
+set $menu 'fuzzel --log-level=error -i Memphis98'
+
 
 # Set wallpaper
 output * bg ~/Sway_Wallpaper_CaveCanem_1920x1080.png fill
@@ -77,7 +79,7 @@ bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 # bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
+
 bindsym $mod+Shift+Up move up
 # bindsym $mod+Shift+Right move right
 
@@ -103,6 +105,9 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+
+# Move to the parent container
+bindsym $mod+Shift+a nop i3ipc_move other
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -143,6 +148,9 @@ bindsym XF86MonBrightnessDown exec ~/hotkey-ctl/brightness.sh down # decrease sc
 
 # start menu
 bindsym $mod+d exec $menu
+
+# password manager
+bindsym $mod+p exec /usr/bin/env ROFI_PASS_CONFIG=~/build/rofi-pass/config.example ~/build/rofi-pass/rofi-pass
 
 # Screenshots
 # Screenshot fullscreen
@@ -195,9 +203,9 @@ mouse_warping container
 focus_follows_mouse always
 
 # Waybar
-bar {
-    swaybar_command waybar
-}
+#bar {
+#    swaybar_command yambar
+#}
 
 set $gnome-schema org.gnome.desktop.interface
 
@@ -212,9 +220,10 @@ exec swayidle -w \
          before-sleep 'swaylock -f -c 000000' \
          lock 'swaylock -f -c 000000' \
          unlock 'kill -KILL $(pgrep swaylock)'
+exec yambar --log-level=error
 
 # Clipboard management
-exec wl-paste -p -t text --watch clipman store
+exec wl-paste -p -t text --watch clipman store -P
 
 exec gammastep-indicator &
 
@@ -226,8 +235,13 @@ exec_always {
     # Needed for pinentry
     dbus-update-activation-environment --all
 
+    # Start the dynamic tiling.
+    $HOME/build/i3ipc-dynamic-tiling/i3ipc-dynamic-tiling
+
     # https://github.com/emersion/kanshi/issues/43
-    pkill kanshi; exec kanshi
+    killall -9 kanshi
+    while pgrep -u $UID -x kanshi >/dev/null; do sleep 1; done
+    kanshi &
 }
 
 # Mouse cursor themes
