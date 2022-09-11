@@ -7,6 +7,13 @@ single repo, and can install the configuration using various make targets.
 
 * Requirements
 I am using the following configuration:
+
+It is required to install these packages using your distribution's package
+manager.
+
+It is also required to install [[https://git-scm.com/][git]] and [[https://www.gnu.org/software/make/][GNU make]] through your distribution if
+they are not already available on your system.
+
 ** [[https://codeberg.org/dnkl/foot/][foot]]
 A minimalist terminal emulator using damage tracking
 ** Pipewire
@@ -25,12 +32,6 @@ Monitor hotplugging in Wayland
 Modular status panel for X11 and Wayland, inspired by https://github.com/jaagr/polybar
 ** [[https://gitlab.com/chinstrap/gammastep][gammastep]]
 A wlroots based color-temperature adjuster
-
-It is required to install these above packages using your distribution's package
-manager.
-
-It is also required to install [[https://git-scm.com/][git]] through your distribution if it is not
-already available on your system.
 
 * Installation
 1. Clone this repository
