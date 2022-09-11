@@ -23,7 +23,9 @@ set $menu 'fuzzel --log-level=error -i Memphis98'
 
 
 # Set wallpaper
-output * bg ~/Sway_Wallpaper_CaveCanem_1920x1080.png fill
+# output * bg ~/Sway_Wallpaper_CaveCanem_1920x1080.png fill
+output * bg ~/onoda_sakamichi__yowamushi_pedal__by_greenmapple17_d8w9wog.png fill
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -49,10 +51,11 @@ for_window [class="Firefox" tiling] border pixel 0
 # ensure firefox on WS 3
 assign [app_id="firefox"] 3:www
 assign [app_id="emacs"] 2:emacs
-assign [app_id="zoom"] 4
+assign [app_id="zoom"] 4:mail
+assign [app_id="thunderbird"] 4:mail
 
 # lock screen
-bindsym $mod+l exec swaylock
+bindsym $mod+l exec loginctl lock-session
 
 # move to monitor
 bindsym $mod+Control+Shift+Left move workspace to output left
@@ -116,7 +119,7 @@ bindsym $mod+Shift+a nop i3ipc_move other
 bindsym $mod+1 workspace 1:shell
 bindsym $mod+2 workspace 2:emacs
 bindsym $mod+3 workspace 3:www
-bindsym $mod+4 workspace 4
+bindsym $mod+4 workspace 4:mail
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -128,7 +131,7 @@ bindsym $mod+0 workspace 0
 bindsym $mod+Shift+1 move container to workspace 1:shell; workspace 1:shell
 bindsym $mod+Shift+2 move container to workspace 2:emacs; workspace 2:emacs
 bindsym $mod+Shift+3 move container to workspace 3:www; workspace 3:www
-bindsym $mod+Shift+4 move container to workspace 4; workspace 4
+bindsym $mod+Shift+4 move container to workspace 4:mail; workspace 4:mail
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
@@ -150,7 +153,6 @@ bindsym XF86MonBrightnessDown exec ~/hotkey-ctl/brightness.sh down # decrease sc
 bindsym $mod+d exec $menu
 
 # password manager
-bindsym $mod+p exec /usr/bin/env ROFI_PASS_CONFIG=~/build/rofi-pass/config.example ~/build/rofi-pass/rofi-pass
 
 # Screenshots
 # Screenshot fullscreen
@@ -214,13 +216,14 @@ for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle fullscreen
 
 exec swayidle -w \
-         timeout 80 'swaylock -f -c 000000' \
-         timeout 110 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000' \
-         lock 'swaylock -f -c 000000' \
-         unlock 'kill -KILL $(pgrep swaylock)'
-exec yambar --log-level=error
+         timeout 80   'gtklock -d' \
+         timeout 110  'swaymsg "output * dpms off"' \
+         resume       'swaymsg "output * dpms on"' \
+         before-sleep 'gtklock -d' \
+         lock         'gtklock -d' \
+         unlock       'kill -KILL $(pgrep gtklock)'
+#exec yambar --log-level=error
+exec_always yambar 2>&1 | tee /tmp/yambar.txt
 
 # Clipboard management
 exec wl-paste -p -t text --watch clipman store -P
@@ -241,6 +244,7 @@ exec_always {
     # https://github.com/emersion/kanshi/issues/43
     killall -9 kanshi
     while pgrep -u $UID -x kanshi >/dev/null; do sleep 1; done
+    fnott &
     kanshi &
 }
 

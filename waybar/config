@@ -37,8 +37,8 @@
     "tooltip": false
     },
     "custom/daytime": {
-    "exec": "~/.config/waybar/day_night_cycle.sh get",
-    "on-click": "~/.config/waybar/day_night_cycle.sh set",
+    "exec": "~/.config/scripts/day_night_cycle.sh get",
+    "on-click": "~/.config/scripts/day_night_cycle.sh set",
     "format": " {} ",
     "return-type": "",
     "signal": 1,
@@ -78,7 +78,7 @@
             "warning": 30,
             "critical": 15
         },
-        "on-update": "~/dotfiles/cron/traffic.sh",
+        "on-update": "~/dotfiles/cron/battery_warning.sh",
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",

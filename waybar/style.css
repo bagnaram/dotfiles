@@ -21,7 +21,7 @@ window#waybar.hidden {
 }
 
 #workspaces button#sway-workspace-1\:shell {
-    background-image: url("/home/mbagnara/icons_scalable_Terminal.svg");
+    background-image: url("~/icons_scalable_Terminal.svg");
     background-repeat: no-repeat;
     background-size: 30px 30px;
     background-position: right;

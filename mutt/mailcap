@@ -1,4 +1,5 @@
 application/ms-tnef; tnef -w %s
+text/html;              w3m -dump -I %{charset} -T text/html; copiousoutput;
 text/html; elinks -force-html -dump-charset UTF-8 -dump-color-mode 4 -dump 1 %s; nametemplate=%s.html; needsterminal; 
 text/html; elinks -force-html -dump-charset UTF-8 -dump-color-mode 4 -dump 1 %s; nametemplate=%s.html; needsterminal; copiousoutput;
 application/pdf; zathura %s &>/dev/null

@@ -3,13 +3,6 @@ DOTFILES := $(shell pwd)
 .PHONY: all
 all: mutt xterm vim i3 screen redshift dunst doom waybar rofi kanshi fnott swaylock
 
-.PHONY: ohmyzsh
-ohmyzsh:
-	if [ ! -d "${HOME}/.zshrc" ]; then \
-	  ln -fs $(DOTFILES)/zshrc ${HOME}/.zshrc; \
-	  sed -i '1iexport ZSH="$(DOTFILES)/zsh"' $(DOTFILES)/zshrc; \
-	fi; 
-
 .PHONY: mutt
 mutt:
 	if [ ! -d "${HOME}/.mutt" ]; then ln -fs $(DOTFILES)/mutt ${HOME}/.mutt; fi
@@ -53,7 +46,7 @@ dunst:
 kanshi:
 	if [ ! -d "${HOME}/.config/kanshi" ]; then ln -fs $(DOTFILES)/kanshi  ${HOME}/.config/kanshi; fi
 .PHONY: waybar
-waybar:
+waybar: scripts
 	ln -fs $(DOTFILES)/waybar  ${HOME}/.config/waybar
 .PHONY: pavolume
 pavolume:
@@ -70,6 +63,13 @@ fontconfig:
 .PHONY: swaylock
 swaylock:
 	ln -fs $(DOTFILES)/swaylock  ${HOME}/.config/swaylock
+.PHONY: scripts
+scripts:
+	ln -fs $(DOTFILES)/scripts  ${HOME}/.config/scripts
+.PHONY: yambar
+yambar: scripts
+	ln -fs $(DOTFILES)/yambar  ${HOME}/.config/yambar
+	envsubst < ${HOME}/.config/yambar/config.yml.env > ${HOME}/.config/yambar/config.yml
 .PHONY: rofi
 rofi:
 	mkdir -p ${HOME}/.config/rofi/
@@ -103,3 +103,4 @@ clean:
 	rm ${HOME}/.config/i3/status.conf
 	rm ${HOME}/.zshrc
 	rm ${HOME}/.doom.d
+	rm ${HOME}/.config/yambar

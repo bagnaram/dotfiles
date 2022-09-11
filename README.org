@@ -15,16 +15,23 @@ wlroots support for WebRTC
 doom-emacs
 ** sway
 Wayland wlroots based compositor
-** [[https://github.com/davatorium/rofi][wofi]]
-A Wayland launcher/menu with GTK styling
-** [[https://github.com/emersion/mako][mako]]
-Wayland notification daemon
+** [[https://codeberg.org/dnkl/fnott][fnott]]
+Keyboard driven and lightweight Wayland notification daemon for wlroots-based compositors.
+** [[https://codeberg.org/dnkl/fuzzel][fuzzel]]
+Application launcher for wlroots based Wayland compositors, similar to rofi's `drun` mode.
 ** [[https://github.com/emersion/kanshi][kanshi]]
 Monitor hotplugging in Wayland
-** [[https://github.com/Alexays/Waybar][waybar]]
-Wayland notification bar
+** [[https://codeberg.org/dnkl/yambar][yambar]]
+Modular status panel for X11 and Wayland, inspired by https://github.com/jaagr/polybar
 ** [[https://gitlab.com/chinstrap/gammastep][gammastep]]
 A wlroots based color-temperature adjuster
+
+It is required to install these above packages using your distribution's package
+manager.
+
+It is also required to install [[https://git-scm.com/][git]] through your distribution if it is not
+already available on your system.
+
 * Installation
 1. Clone this repository
    #+BEGIN_SRC sh :results verbatim :exports both
@@ -41,8 +48,9 @@ A wlroots based color-temperature adjuster
    : Submodule path 'vim/bundle/tabular': checked out '339091ac4dd1f17e225fe7d57b48aff55f99b23a'
    : Submodule path 'vim/pathogen': checked out 'e9fb0914dba5bdfe2feaa364dda2e9495c5620a2'
    : Submodule path 'zsh': checked out '32338fd40cae45c775dadc34ae05476811a3834b'
-3. You can either install all of the modules specified in this dotfiles repo. It
-   will create symlinks to all the configuration files within the dotfiles
+3. You can either install all of the configurations specified in this dotfiles
+   repo or specific ones you wish to use. It will create symlinks to all the
+   configuration files within the dotfiles subdirectories.
    #+BEGIN_SRC sh :results verbatim :exports both
    make all
    #+END_SRC
@@ -55,7 +63,8 @@ A wlroots based color-temperature adjuster
 Simply modify the files within the ~dotfiles~ directory
 * GPG SSH subkeys
 I use the GPG subkeys to provide SSH access to my environment. This is ideal
-because the private keys exist on my Yubikey and not anywhere else. To configure OpenSSH, run:
+because the private keys exist on my Yubikey and not anywhere else. To configure
+OpenSSH, run:
 
 1. Setup GPG agent to enable SSH access
    #+BEGIN_SRC sh :results verbatim :exports both
@@ -72,3 +81,6 @@ because the private keys exist on my Yubikey and not anywhere else. To configure
    keygrip for the authentication key.
 
    Use the 3rd line and add it to the ~/.gnupg/sshcontrol~ file
+* Un-installation
+There is a `make` target to uninstall the dotfile configuration. ~Warning: This
+removes each of the symlinks that get created by this tool~

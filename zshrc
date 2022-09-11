@@ -25,7 +25,6 @@ function setalias() {
   alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
   alias sudo=doas
   alias strip='exiv2 -m ~/dotfiles/strip.exiv2'
-  alias less='less -R'
 }
 setalias
 
@@ -124,6 +123,23 @@ export DISABLE_AUTO_UPDATE=true
 export DO_NOT_TRACK=1
 # terraform
 export CHECKPOINT_DISABLE=ANY_VALUE
+
+#Colorful man pages
+export LESS=-R
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+export GROFF_NO_SGR=1
+
+# Aliases for software managment
+alias pacup='doas pacman -Syu'
+alias yayup='paru -Syu'
+
+
 
 # zsh-syntax-highlighting paste performance improvement
 # https://github.com/zsh-users/zsh-autosuggestions/issues/238#issuecomment-389324292
