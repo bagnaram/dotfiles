@@ -1,4 +1,8 @@
 #+TITLE: dotfiles
+
+*This repository has been moved* to https://codeberg.org/bagnaram/dotfiles
+and will no longer be updated here! Please view all updates on Codeberg.
+
 These are my dotfiles, or in other words, a collection of configuration for
 various applications. All stored in a single repository. The idea is you clone a
 single repo, and can install the configuration using various make targets.
